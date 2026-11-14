@@ -1,7 +1,7 @@
-:root{--verde:#972525;--hondo:#6E1A1B;--acento:#972525;--acento-osc:#6E1A1B;--rosa:#C9A55A;--crema:#F6EFE4;--negro:#2A1E1C;--suave:#6B5A55}
 @font-face{font-family:"Gloock";font-style:normal;font-weight:400;font-display:swap;src:url(../assets/fonts/gloock.woff2) format("woff2")}
-
 @font-face{font-family:"Figtree";font-style:normal;font-weight:400 700;font-display:swap;src:url(../assets/fonts/figtree.woff2) format("woff2")}
+:root{--verde:#972525;--hondo:#6E1A1B;--acento:#972525;--acento-osc:#6E1A1B;--rosa:#C9A55A;--crema:#F6EFE4;--negro:#2A1E1C;--suave:#6B5A55}
+
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;scroll-padding-top:70px;-webkit-text-size-adjust:100%}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
@@ -38,3 +38,7 @@ footer{padding:10px 20px 34px;display:flex;flex-direction:column;align-items:cen
 .cat h3.sub{font:600 .78rem/1.2 "Figtree",sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--acento);margin:18px 0 2px}
 .cat .sub+ul li{padding:9px 0}
 a:focus-visible{outline:3px solid var(--acento);outline-offset:2px}
+
+/* == capa estilo-demos == */
+em,h1 em{font-style:normal;color:inherit}
+.row b{font-variant-numeric:tabular-nums}

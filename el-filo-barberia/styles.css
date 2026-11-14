@@ -201,3 +201,13 @@ footer{border-top:1px solid var(--line);padding-block:44px 120px;color:var(--mut
 
 /* Proporción del título en pantallas bajas */
 @media (min-width:900px){.hero h1{line-height:.92}}
+
+/* == capa estilo-otros == */
+html,body{overflow-x:clip}
+p,li{text-wrap:pretty}
+.kicker,.nav-links a,.hero-meta,.hero-photo .tag,.ph::before,.serv .min,.shot figcaption span,.barber .role,.field label,.info a.maps{
+  text-transform:none;letter-spacing:.01em}
+.kicker{font-size:.95rem}
+.nav-links a{font-size:.92rem}
+.hero-meta,.barber .role,.info a.maps,.field label{font-size:.88rem}
+.hero-photo .tag,.serv .min,.shot figcaption span,.ph::before{font-size:.8rem}

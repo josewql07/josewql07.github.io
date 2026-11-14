@@ -204,3 +204,9 @@ footer{padding-block:40px 130px;color:var(--ink-mute);font-size:.9rem}
   .hero{padding-block:clamp(108px,16svh,150px) clamp(44px,8svh,80px)}
   .hero h1{font-size:clamp(2.4rem,min(6vw,9svh),4.9rem)}
 }
+
+/* == capa estilo-otros == */
+html,body{overflow-x:clip}
+p,li{text-wrap:pretty}
+.sec-title em,.hero h1 em{color:inherit;background:none;-webkit-background-clip:border-box;background-clip:border-box}
+.eyebrow{text-transform:none;letter-spacing:0;font-size:.95rem}

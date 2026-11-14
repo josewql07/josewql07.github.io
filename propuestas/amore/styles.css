@@ -1,7 +1,4 @@
 /* Fuentes alojadas en el propio sitio (SIL Open Font License) */
-@font-face{font-family:"Fraunces";font-style:normal;font-weight:400 700;font-display:swap;src:url(assets/fonts/fraunces.woff2) format("woff2")}
-@font-face{font-family:"Fraunces";font-style:italic;font-weight:400 700;font-display:swap;src:url(assets/fonts/fraunces-italic.woff2) format("woff2")}
-@font-face{font-family:"Inter";font-style:normal;font-weight:400 600;font-display:swap;src:url(assets/fonts/inter.woff2) format("woff2")}
 /* Amore · Editorial vino y dorado (plantilla Doña Paquita)
    Paleta: rojo #7E170F (identidad), crema #F8F1E7, blanco #FFFFFF, marrón #38221C */
 :root{
@@ -407,24 +404,22 @@ footer .logo{color:var(--crema);display:inline-block;margin-bottom:10px}
 .dish:hover .dish-img img.bf-in{transform:scale(1.08);filter:saturate(1.15)}
 @media (prefers-reduced-motion:reduce){.btn-shine::after{animation:none;display:none}.bf{filter:none;opacity:1;transform:none}}
 
-/* == capa amore-estilo == */
+/* == capa estilo-demos == */
 @font-face{font-family:"Gloock";font-style:normal;font-weight:400;font-display:swap;src:url(assets/fonts/gloock.woff2) format("woff2")}
 @font-face{font-family:"Figtree";font-style:normal;font-weight:400 700;font-display:swap;src:url(assets/fonts/figtree.woff2) format("woff2")}
 :root{--display:"Gloock",Georgia,"Times New Roman",serif;--body:"Figtree",system-ui,-apple-system,"Segoe UI",sans-serif}
 body{overflow-x:clip}
 h1,h2,h3{font-weight:400;letter-spacing:-.01em}
 p,li{text-wrap:pretty}
-/* un solo tono por título: nada de una palabra en cursiva de otro color */
-h1 em,h2 em,h3 em,.sec-title em,.red .sec-title em{font-style:normal;font-weight:inherit;color:inherit}
-/* etiquetas: tamaño de texto, minúscula normal, sin espaciado */
-.kicker,.splash small,.menu-card li b,.menu-price span,.scroll-cue,.hot,.tag,.rev-list cite,footer h4,.qr-card span{
+/* un solo tono por titulo */
+h1 em,h2 em,h3 em,.sec-title em,.red .sec-title em,.hero h1 em,.cierre h2 em{font-style:normal;font-weight:inherit;color:inherit}
+/* etiquetas: minuscula normal, sin espaciado */
+.kicker,.splash small,.menu-card li b,.menu-price span,.scroll-cue,.hot,.tag,.rev-list cite,footer h4,.qr-card span,.dish-img.ph span{
   text-transform:none;letter-spacing:0;font-weight:600}
 .kicker{font-size:.95rem}
 .menu-card li b,.hot,.tag{font-size:.8rem}
 .splash small,.menu-price span,.scroll-cue,.rev-list cite,footer h4,.qr-card span{font-size:.85rem}
 .price,.menu-price,.row b{font-variant-numeric:tabular-nums}
-/* Gloock no tiene cursiva: nada de cursiva sintetica */
-.hero h1 em,.cierre h2 em,.red .sec-title em{color:inherit}
+/* sin cursiva sintetica */
+em,.rot,.logo,.marquee span,.step .n,.rev-list p,.logo em{font-style:normal}
 .hero .sub{font:400 clamp(1.05rem,min(1.6vw,2.4svh),1.25rem)/1.55 var(--body);max-width:40ch}
-.rot,.logo,em,.marquee span,.step .n,.rev-list p{font-style:normal}
-.logo{font-family:var(--display)}
