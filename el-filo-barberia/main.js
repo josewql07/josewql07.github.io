@@ -28,7 +28,7 @@
     var el = $("[data-status]"); if (!el) return;
     var n = limaNow(), r = HOURS[n.day], open = n.h >= r[0] && n.h < r[1];
     el.classList.toggle("open", open);
-    $("span", el).textContent = open ? "Abierto ahora · hasta las " + r[1] + ":00" : "Cerrado · abrimos a las " + (n.h < r[0] ? r[0] : HOURS[(n.day + 1) % 7][0]) + ":00";
+    $("span", el).textContent = open ? "Abierto ahora, hasta las " + r[1] + ":00" : "Cerrado, abrimos a las " + (n.h < r[0] ? r[0] : HOURS[(n.day + 1) % 7][0]) + ":00";
   }
 
   function initNav() {
