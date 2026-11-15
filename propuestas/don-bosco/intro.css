@@ -1,0 +1,59 @@
+/* Entrada de la página (intro.js): apertura con contador, titular por palabras, foto que entra y flota */
+:root{--e:cubic-bezier(.2,.7,.2,1)}
+.splash{display:none}
+.js .splash{position:fixed;inset:0;z-index:200;display:grid;place-items:center;text-align:center;animation:splashSeguro .01s 4.4s forwards}
+.js .splash[hidden]{display:none}
+@keyframes splashSeguro{to{visibility:hidden;pointer-events:none}}
+.splash-in{position:relative;z-index:1;display:grid;justify-items:center;gap:.7rem;transition:transform .8s var(--e),opacity .5s}
+.splash-in>*{animation:splashIn .9s var(--e) both}
+.splash-in>*:nth-child(2){animation-delay:.12s}
+.splash-in>*:nth-child(3){animation-delay:.24s}
+.splash.is-out .splash-in{transform:translateY(-40px) scale(.96);opacity:0}
+.splash [data-count]{font-variant-numeric:tabular-nums}
+.splash-bar{position:absolute;z-index:1;left:50%;bottom:max(12%,calc(56px + env(safe-area-inset-bottom,0px)));width:min(260px,62vw);height:3px;translate:-50% 0;overflow:hidden;border-radius:3px;transition:opacity .3s}
+.splash-bar i{display:block;height:100%;transform-origin:left;transform:scaleX(0)}
+.splash.is-out .splash-bar{opacity:0}
+@keyframes splashIn{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+@keyframes safeShow{to{opacity:1;transform:none;clip-path:none}}
+@keyframes flota{0%,100%{translate:0 0}50%{translate:0 -9px}}
+
+.btn:active,.agregar:active,.mas:active,.tabs-carta button:active,.tabs button:active{scale:.96}
+.hero-foto img,.arco img{transition:transform .5s ease-out,scale 1.7s var(--e) .3s}
+
+@media (prefers-reduced-motion:no-preference){
+  .js .hero-foto,.js .arco,.js .arco::before,.js .arco img{animation:none}
+  .top{transition:transform .8s var(--e) .1s}
+  html.js:not(.is-open) .top{transform:translateY(-100%);animation:safeShow .01s 4.8s forwards}
+  .hero-txt>*:not(h1){transition:opacity .8s var(--e),transform .8s var(--e),background-color .2s,color .2s,border-color .2s}
+  .hero-txt>*:nth-child(2){transition-delay:.45s}
+  .hero-txt>*:nth-child(3){transition-delay:.6s}
+  .hero-txt>*:nth-child(4){transition-delay:.75s}
+  .hero-txt>*:nth-child(5){transition-delay:.9s}
+  .hero-txt>*:nth-child(6){transition-delay:1.05s}
+  html.js:not(.is-open) .hero-txt>*:not(h1){opacity:0;transform:translateY(18px);animation:safeShow .01s 4.8s forwards}
+  .hero h1 .w{display:inline-block;overflow:hidden;vertical-align:bottom;padding:0 .05em .14em;margin:0 -.05em -.14em}
+  .hero h1 .w>span{display:inline-block;transition:transform .9s var(--e) calc(.25s + var(--i,0)*65ms)}
+  html.js:not(.is-open) .hero h1 .w>span{transform:translateY(112%);animation:safeShow .01s 4.8s forwards}
+  .hero .btn,.hero .sede-sel button{translate:var(--mx,0) var(--my,0)}
+  .hero-foto img,.arco img{transform:translate(var(--px,0),var(--py,0))}
+}
+
+/* Don Bosco: dos hojas azules que se abren como puertas */
+.js .splash::before,.js .splash::after{content:"";position:absolute;top:0;bottom:0;width:50.5%;background:#0E4194;transition:transform .95s cubic-bezier(.7,0,.2,1)}
+.splash::before{left:0}
+.splash::after{right:0}
+.splash.is-out::before{transform:translateX(-101%)}
+.splash.is-out::after{transform:translateX(101%)}
+.splash b{display:block;font:800 clamp(2.2rem,8vw,3.6rem)/1 var(--letra);color:#FAFBFF;letter-spacing:-.01em}
+.splash small{font:500 1.05rem var(--letra);color:var(--yema);letter-spacing:.14em;text-transform:uppercase}
+.splash-in img{width:74px;height:auto;border-radius:3px}
+.splash-bar{background:rgba(250,251,255,.22)}
+.splash-bar i{background:var(--yema)}
+@media (prefers-reduced-motion:no-preference){
+  .hero-foto{transition:clip-path 1.2s cubic-bezier(.7,0,.2,1) .35s}
+  html.js:not(.is-open) .hero-foto{clip-path:inset(0 0 100% 0);animation:safeShow .01s 4.8s forwards}
+  .hero-foto{clip-path:inset(0)}
+  html.js:not(.is-open) .hero-foto img{scale:1.35}
+  .hero-foto img{scale:1}
+  html.is-open .hero-foto{animation:flota 7s ease-in-out 1.8s infinite}
+}
