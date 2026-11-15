@@ -33,6 +33,7 @@
     $$("[data-cuenta]").forEach(function (el) { el.textContent = cuenta(); });
     $$("[data-total]").forEach(function (el) { el.textContent = soles(total()); });
     $$("[data-con-items]").forEach(function (el) { el.hidden = !items.length; });
+    $$("[data-sin-items]").forEach(function (el) { el.hidden = !!items.length; });
     var lista = $("#bolsa-items");
     if (!lista) return;
     lista.textContent = "";

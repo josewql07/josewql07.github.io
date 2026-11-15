@@ -77,9 +77,17 @@ html:not(.js) .pane-t{display:block;font-size:1.5rem;margin:1.5rem 0 .75rem;colo
 .mas{width:44px;height:44px;border:2.5px solid var(--achiote);border-radius:50%;background:var(--leche);color:var(--achiote);font:800 1.4rem/1 var(--texto);cursor:pointer;transition:background-color .15s,color .15s}
 .mas:hover{background:var(--achiote);color:var(--leche)}
 
-.anio{background:var(--achiote);color:var(--leche);padding:clamp(3rem,8vw,5rem) 1rem;text-align:center;overflow:hidden}
-.grande{margin:0;font-family:var(--slab);font-size:clamp(6rem,26vw,19rem);line-height:.85;color:var(--masa);font-variant-numeric:tabular-nums}
-.lema{margin:1.25rem auto 0;max-width:34rem;font-size:clamp(1.05rem,2vw,1.3rem);font-weight:700}
+.casa{background:var(--achiote);color:var(--leche);padding:clamp(3rem,8vw,5.5rem) max(1rem,calc((100% - var(--ancho))/2));display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(2rem,5vw,4.5rem);align-items:center}
+.sello{display:inline-block;margin:0 0 1rem;padding:.35rem .9rem;border:2.5px solid var(--masa);border-radius:99px;font-family:var(--slab);font-size:1.05rem;color:var(--masa);transform:rotate(-3deg)}
+.casa h2{font-size:clamp(2rem,4.2vw,3.3rem);color:var(--leche)}
+.casa-txt p:not(.sello){max-width:31rem;font-size:1.08rem}
+.btn.crema{background:var(--leche);color:var(--achiote-osc);border-color:var(--leche);margin-top:.5rem}
+.btn.crema:hover{background:var(--masa)}
+.mosaico{display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem}
+.mosaico figure{margin:0;border-radius:12px;overflow:hidden;background:var(--achiote-osc)}
+.mosaico img{width:100%;height:100%;object-fit:cover;aspect-ratio:3/4}
+.mosaico .m-fachada{grid-column:1/-1}
+.mosaico .m-fachada img{aspect-ratio:16/8;object-position:50% 30%}
 
 .sedes{max-width:var(--ancho);margin:0 auto;padding:clamp(3rem,8vw,5rem) 1rem}
 .sedes-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem}
@@ -133,6 +141,7 @@ html:not(.js) .pane-t{display:block;font-size:1.5rem;margin:1.5rem 0 .75rem;colo
   .hero-foto{order:-1;width:min(56%,13rem)}
   .logo{display:none}
   .sedes-grid{grid-template-columns:1fr}
+  .casa{grid-template-columns:1fr}
 }
 @media (max-width:640px){
   body{font-size:1rem}
