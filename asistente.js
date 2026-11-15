@@ -9,8 +9,8 @@
   /* ---------- Datos del negocio ---------- */
   var P = {
     basico: { n: "Básico", p: 350, d: "Una página con tus servicios o productos, fotos, horario, mapa y botón de WhatsApp. Lista en 3 a 4 días." },
-    negocio: { n: "Negocio", p: 700, d: "Todo lo del Básico, más catálogo o carta, galería, reseñas, dominio propio el primer año y ficha en Google Maps." },
-    pro: { n: "Pro", p: 1100, d: "Todo lo de Negocio, más pedidos o reservas que llegan a tu WhatsApp, respuesta automática en WhatsApp Business y 1 mes de mantenimiento gratis." }
+    negocio: { n: "Negocio", p: 400, d: "Todo lo del Básico, más catálogo o carta, galería, reseñas, dominio propio el primer año y ficha en Google Maps." },
+    pro: { n: "Pro", p: 600, d: "Todo lo de Negocio, más pedidos o reservas que llegan a tu WhatsApp, respuesta automática en WhatsApp Business y 1 mes de mantenimiento gratis." }
   };
   Object.keys(P).forEach(function (k) { P[k].f = P[k].p.toLocaleString("en-US"); });
   var DEMOS = [
