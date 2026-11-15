@@ -218,3 +218,6 @@ p{text-wrap:pretty}
 .marca img{height:40px;width:auto}
 @media (max-width:900px){.panel-carta{columns:1}}
 @media (max-width:640px){.tabs-carta{top:3.6rem}}
+
+/* Los campos del pedido que se ocultan (dirección, programar, vuelto) deben ocultarse de verdad */
+#bolsa-form [hidden],.b-prog[hidden],.b-cerrado[hidden]{display:none!important}

@@ -200,3 +200,6 @@ p{text-wrap:pretty}
 .indice a[aria-current]{background:var(--tinta);color:var(--hueso)}
 .grupo{scroll-margin-top:calc(var(--alto-top,4rem) + 4.5rem)}
 @media (min-width:1100px){.carta .indice{display:none}}
+
+/* Los campos del pedido que se ocultan (dirección, programar, vuelto) deben ocultarse de verdad */
+#bolsa-form [hidden],.b-prog[hidden],.b-cerrado[hidden]{display:none!important}
