@@ -24,8 +24,28 @@
   };
   var abrirWa = function (texto) {
     var url = "https://wa.me/" + body.dataset.wa + "?text=" + encodeURIComponent(texto);
-    var w = window.open(url, "_blank", "noopener");
-    if (!w) location.href = url;
+    // Con "noopener" el navegador devuelve null aunque abra la pestaña, y la página se iba a WhatsApp dos veces.
+    var w = window.open(url, "_blank");
+    if (w) { try { w.opener = null; } catch (e) {} } else location.href = url;
+  };
+  /* Mensajes dentro del formulario (el aviso flotante queda detrás de las ventanas) */
+  var mensajeEn = function (form, cls) {
+    var m = $("." + cls, form);
+    if (!m) {
+      m = el("p", cls); m.setAttribute("role", cls === "f-ok" ? "status" : "alert"); m.hidden = true;
+      var boton = $("[type=submit]", form); form.insertBefore(m, boton);
+    }
+    return m;
+  };
+  var marcarError = function (form, campo, texto) {
+    var m = mensajeEn(form, "f-err");
+    m.textContent = texto; m.hidden = false;
+    var ok = $(".f-ok", form); if (ok) ok.hidden = true;
+    if (campo) {
+      campo.setAttribute("aria-invalid", "true");
+      campo.focus();
+      campo.addEventListener("input", function limpiar() { campo.removeAttribute("aria-invalid"); m.hidden = true; campo.removeEventListener("input", limpiar); });
+    }
   };
 
   /* Hora de Lima, sin importar dónde esté el celular del cliente */
@@ -328,12 +348,13 @@
 
     fb.addEventListener("submit", function (ev) {
       ev.preventDefault();
-      if (!items.length) { avisar("Tu pedido está vacío"); return; }
+      if (!items.length) { marcarError(fb, null, "Tu pedido está vacío. Agrega algo de la carta."); return; }
+      var errPrevio = $(".f-err", fb); if (errPrevio) errPrevio.hidden = true;
       var f = new FormData(fb);
       var min = parseFloat(body.dataset.min || "0");
       if (min && f.get("modo") === "delivery" && total() < min) { pintar(); return; }
-      if (f.get("modo") === "delivery" && !String(f.get("direccion") || "").trim()) { $("input", dir).focus(); avisar("Falta la dirección de entrega"); return; }
-      if (!String(f.get("nombre") || "").trim()) { $("input[name=nombre]", fb).focus(); avisar("Falta tu nombre"); return; }
+      if (f.get("modo") === "delivery" && !String(f.get("direccion") || "").trim()) { marcarError(fb, $("input", dir), "Escribe la dirección de entrega."); return; }
+      if (!String(f.get("nombre") || "").trim()) { marcarError(fb, $("input[name=nombre]", fb), "Escribe tu nombre para que el local sepa de quién es el pedido."); return; }
       var lineas = ["Hola " + body.dataset.local + ", quiero hacer este pedido:", ""];
       items.forEach(function (i) {
         lineas.push("• " + i.q + " × " + i.n + " — " + soles(i.p * i.q));
@@ -356,6 +377,13 @@
       lineas.push("A nombre de: " + f.get("nombre"));
       if (f.get("nota")) lineas.push("Nota: " + f.get("nota"));
       abrirWa(lineas.join("\n"));
+      var ok = mensajeEn(fb, "f-ok");
+      ok.textContent = "";
+      ok.append(el("b", null, "Tu pedido se abrió en WhatsApp."), " Solo falta tocar enviar allí. ");
+      var vaciar = el("button", "f-vaciar", "Vaciar mi pedido"); vaciar.type = "button";
+      vaciar.addEventListener("click", function () { items.length = 0; guardar(); pintar(); ok.hidden = true; avisar("Pedido vaciado"); });
+      ok.append(vaciar);
+      ok.hidden = false;
     });
   }
   pintar();
@@ -400,7 +428,9 @@
       var f = new FormData(form);
       var d = new Date(f.get("fecha") + "T12:00:00");
       var error = "";
-      if (dias.indexOf(d.getDay()) < 0) error = form.dataset.diasTexto || "Ese día el local no atiende.";
+      if (!String(f.get("nombre") || "").trim()) error = "Escribe tu nombre para la reserva.";
+      else if (!f.get("fecha")) error = "Elige el día de tu reserva.";
+      else if (dias.indexOf(d.getDay()) < 0) error = form.dataset.diasTexto || "Ese día el local no atiende.";
       else if (f.get("hora") < desde || f.get("hora") > hasta) error = "Las reservas son entre " + desde + " y " + hasta + ".";
       if (msg) { msg.textContent = error; msg.hidden = !error; }
       if (error) return;
