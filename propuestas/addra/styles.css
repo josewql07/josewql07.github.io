@@ -256,3 +256,4 @@ main:focus{outline:none}
 .hist .destaque::before{content:"";display:block;width:48px;height:2px;margin-bottom:.8rem;background:var(--farol)}
 .form input:focus-within,.form select:focus-within{outline:3px solid var(--farol);outline-offset:2px}
 .pie-det a{min-width:44px}
+.propuesta p{margin:0}

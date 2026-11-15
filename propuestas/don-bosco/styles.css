@@ -273,3 +273,4 @@ main:focus{outline:none}
 .form input:focus-within,.form select:focus-within{outline:3px solid var(--yema);outline-offset:2px}
 .pie-det a{min-width:44px}
 .local dd a,.otra a{display:inline-flex;align-items:center;min-height:44px}
+.propuesta p{margin:0}
