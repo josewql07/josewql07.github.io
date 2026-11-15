@@ -179,3 +179,6 @@ html:not(.js) .pane-t{display:block;font-size:1.5rem;margin:1.5rem 0 .75rem;colo
 .b-cerrado{margin:0;padding:.6rem .8rem;font-weight:600;font-size:.92rem;border-left:3px solid var(--achiote);background:color-mix(in srgb,var(--achiote) 12%,transparent)}
 .modo input:disabled+*,.modo label:has(input:disabled){opacity:.5}
 .cnt{margin-left:.4rem;font-size:.78em;font-weight:600;opacity:.6;font-variant-numeric:tabular-nums}
+
+/* Los campos del pedido que se ocultan (dirección, programar, vuelto) deben ocultarse de verdad */
+#bolsa-form [hidden],.b-prog[hidden],.b-cerrado[hidden]{display:none!important}
