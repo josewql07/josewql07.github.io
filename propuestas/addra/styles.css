@@ -112,13 +112,13 @@ p{text-wrap:pretty}
 .dos{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
 .r-error{margin:0;padding:.6rem .8rem;background:#3B2614;color:#F6CF8E;font-weight:600}
 
-.llegar{background:var(--caoba);padding:clamp(3.5rem,8vw,5.5rem) max(1rem,calc((100% - var(--ancho))/2))}
+.llegar{background:var(--caoba);padding:clamp(3.5rem,8vw,5.5rem) max(1rem,calc((100% - var(--ancho))/2));display:grid;grid-template-columns:1.1fr 1fr;gap:clamp(2rem,5vw,4.5rem);align-items:center}
+.llegar-foto{margin:0}
+.llegar-foto img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:2px;border:1.5px solid var(--farol);padding:6px;background:var(--caoba)}
 .llegar h2{font-size:clamp(2.4rem,7vw,5.8rem);line-height:1;color:var(--hueso);max-width:14ch}
 .llegar>p{margin:1rem 0 1.75rem;color:#F3DCCB;font-size:1.1rem}
 .llegar .btn.linea{border-color:#C9937A}
 .llegar .btn.linea:hover{border-color:var(--farol)}
-.prensa{margin:1.75rem 0 0;color:#F3DCCB}
-.prensa a{color:var(--farol)}
 
 .pie{padding:2rem 1rem 6rem;text-align:center;color:var(--gris);font-size:.9rem}
 .pie p{margin:.3rem 0}
@@ -156,7 +156,7 @@ p{text-wrap:pretty}
 @media (max-width:860px){
   .hero{grid-template-columns:1fr;min-height:0}
   .arco{order:-1;width:min(62%,15rem)}
-  .reservas{grid-template-columns:1fr}
+  .reservas,.llegar{grid-template-columns:1fr}
 }
 @media (max-width:640px){
   body{font-size:1rem}
