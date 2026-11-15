@@ -58,6 +58,8 @@
     } catch (err) { return new Date(); }
   }
   var aMin = function (hhmm) { var x = hhmm.split(":"); return +x[0] * 60 + +x[1]; };
+  /* "19:30" -> "7:30 p. m." (como se dice en Lima) */
+  var h12 = function (hhmm) { var x = hhmm.split(":"), h = +x[0]; return ((h % 12) || 12) + ":" + x[1] + (h < 12 ? " a. m." : " p. m."); };
   var aHora = function (m) { return ("0" + Math.floor(m / 60)).slice(-2) + ":" + ("0" + (m % 60)).slice(-2); };
 
   /* ---------- Pedido ---------- */
@@ -303,7 +305,7 @@
       var ahora = ahoraLima();
       var d = new Date(+selDia.value);
       selHora.textContent = "";
-      horasDe(d, ahora).forEach(function (h) { var o = el("option", null, h); o.value = h; selHora.appendChild(o); });
+      horasDe(d, ahora).forEach(function (h) { var o = el("option", null, h12(h)); o.value = h; selHora.appendChild(o); });
     };
     var llenarDias = function () {
       if (!selDia) return;
@@ -366,7 +368,7 @@
       lineas.push("", "Total de la carta: " + soles(total()));
       lineas.push(f.get("modo") === "delivery" ? "Entrega: delivery a " + f.get("direccion") : "Entrega: recojo en el local");
       if (f.get("cuando") === "programar" && selDia && selDia.selectedOptions[0] && f.get("hora")) {
-        lineas.push("Para: " + selDia.selectedOptions[0].dataset.largo + ", a las " + f.get("hora"));
+        lineas.push("Para: " + selDia.selectedOptions[0].dataset.largo + ", a las " + h12(f.get("hora")));
       } else if (f.get("cuando")) {
         lineas.push("Para: lo antes posible");
       }
