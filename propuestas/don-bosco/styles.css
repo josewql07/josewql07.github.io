@@ -221,3 +221,35 @@ p{text-wrap:pretty}
 
 /* Los campos del pedido que se ocultan (dirección, programar, vuelto) deben ocultarse de verdad */
 #bolsa-form [hidden],.b-prog[hidden],.b-cerrado[hidden]{display:none!important}
+
+/* Pie de página: lo que el cliente busca primero (contacto, pago, confianza); las listas largas van plegadas */
+.pie{--pie-bg:#13245C;--pie-fg:#DCE4F7;--pie-acc:#F4C430;padding:0 0 6rem;text-align:left;background:var(--pie-bg);color:var(--pie-fg);font-size:.95rem}
+.pie-in{display:grid;gap:1.5rem 3rem;max-width:var(--ancho);margin:0 auto;padding:2.4rem 1rem 1.6rem}
+.pie h3{margin:0 0 .5rem;font-size:.78rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--pie-acc)}
+.pie p{margin:.3rem 0}
+.pie-wa{display:flex;align-items:center;justify-content:center;gap:.6rem;min-height:56px;padding:.8rem 1.2rem;border-radius:10px;background:#25D366;color:#06301A;font-weight:800;font-size:1.05rem;text-decoration:none;transition:filter .2s,transform .2s}
+.pie-wa:hover{filter:brightness(1.07)}.pie-wa:active{transform:scale(.98)}
+.pie-wa svg{width:22px;height:22px;flex:none}
+.pie-hora{margin:.7rem 0 0!important;opacity:.9}
+.pie-hora b{color:#fff}
+.pie-pago{display:flex;flex-wrap:wrap;gap:.5rem;margin:0;padding:0;list-style:none}
+.pie-pago li{padding:.35rem .85rem;border:1px solid color-mix(in srgb,var(--pie-fg) 40%,transparent);border-radius:99px;font-weight:700;color:#fff}
+.pie-nota{opacity:.8;font-size:.88rem}
+.pie-garantia{display:flex;gap:.6rem;align-items:flex-start;padding:.75rem .9rem;border-radius:8px;background:rgba(37,211,102,.14);border:1px solid rgba(37,211,102,.4);color:#fff}
+.pie-garantia b{color:#7BE9A4}
+.pie-quien p{opacity:.9}
+.pie-det{border-top:1px solid color-mix(in srgb,var(--pie-fg) 25%,transparent)}
+.pie-det:last-of-type{border-bottom:1px solid color-mix(in srgb,var(--pie-fg) 25%,transparent)}
+.pie-det summary{display:flex;justify-content:space-between;align-items:center;min-height:48px;cursor:pointer;font-weight:700;color:#fff;list-style:none}
+.pie-det summary::-webkit-details-marker{display:none}
+.pie-det summary::after{content:"+";font-size:1.3rem;line-height:1;color:var(--pie-acc);transition:transform .25s}
+.pie-det[open] summary::after{transform:rotate(45deg)}
+.pie-det ul,.pie-det ol{margin:0 0 .9rem;padding-left:1.2rem;display:grid;gap:.3rem}
+.pie-det ul{list-style:none;padding:0;grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}
+.pie-det a{color:var(--pie-fg);text-underline-offset:3px}
+.pie-det a:hover{color:#fff}
+.pie-cred{max-width:var(--ancho);margin:0 auto;padding:1rem 1rem 0;border-top:1px solid color-mix(in srgb,var(--pie-fg) 20%,transparent);font-size:.8rem;opacity:.7}
+.pie-cred p{margin:.2rem 0}
+.pie-izq{display:grid;gap:1.5rem}
+@media (min-width:820px){.pie-in{grid-template-columns:1.1fr 1fr;align-items:start}}
+@media (prefers-reduced-motion:reduce){.pie-det summary::after,.pie-wa{transition:none}}
