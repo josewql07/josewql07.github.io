@@ -232,3 +232,4 @@ main:focus{outline:none}
 :root{--achiote:#C81D15}
 .form input:focus-within,.form select:focus-within{outline:3px solid var(--achiote);outline-offset:2px}
 .pie-det a{min-width:44px}
+.propuesta p{margin:0}
