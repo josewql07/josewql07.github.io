@@ -38,7 +38,7 @@
     if (abierto) return;
     abierto = true;
     root.classList.add("is-open");
-    if (splash) setTimeout(function () { splash.hidden = true; }, 1400);
+    if (splash) setTimeout(function () { splash.hidden = true; }, +(splash.dataset.out || 800) + 600);
   }
 
   function contar(el, de, a, t) {
@@ -50,7 +50,7 @@
     if (!splash || reduce) { if (splash) splash.hidden = true; abrir(); return; }
     var barra = $(".splash-bar i", splash);
     var cifras = $$("[data-count]", splash);
-    var t0 = Date.now(), MIN = 2100, cargado = document.readyState === "complete", hecho = false;
+    var t0 = Date.now(), MIN = +(splash.dataset.min || 2100), SALIDA = +(splash.dataset.out || 800), cargado = document.readyState === "complete", hecho = false;
     window.addEventListener("load", function () { cargado = true; });
     setTimeout(function () { cargado = true; }, MIN + 500);
     (function paso() {
@@ -67,9 +67,9 @@
       hecho = true;
       cifras.forEach(function (c) { c.textContent = c.dataset.to; });
       splash.classList.add("is-out");
-      setTimeout(abrir, 350);
+      setTimeout(abrir, Math.round(SALIDA * .45));
     }
-    setTimeout(salir, 3800);
+    setTimeout(salir, MIN + 1200);
   }
 
   /* Botones y fotos que reaccionan al cursor (solo con mouse) */
@@ -97,5 +97,5 @@
   partir();
   reaccion();
   apertura();
-  setTimeout(abrir, 4600); // seguro
+  setTimeout(abrir, 5200); // seguro
 })();
