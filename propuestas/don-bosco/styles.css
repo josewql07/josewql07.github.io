@@ -204,3 +204,17 @@ p{text-wrap:pretty}
 .modo input:disabled+*,.modo label:has(input:disabled){opacity:.5}
 .cnt{margin-left:.4rem;font-size:.78em;font-weight:600;opacity:.6;font-variant-numeric:tabular-nums}
 .indice a[aria-current]{background:var(--cobalto);border-color:var(--cobalto);color:#fff}
+
+/* Carta por categorías */
+.tabs-carta{position:sticky;top:3.9rem;z-index:10;max-width:var(--ancho);margin:0 auto 1.5rem;padding:.6rem 1rem;display:flex;gap:.4rem;overflow-x:auto;scrollbar-width:thin;background:var(--loza)}
+.tabs-carta[hidden]{display:none}
+.tabs-carta button{flex:none;min-height:44px;padding:.5rem 1rem;border:1.5px solid var(--azulejo);border-radius:99px;background:transparent;font:500 .95rem var(--letra);color:var(--noche);white-space:nowrap;cursor:pointer}
+.tabs-carta button:hover{border-color:var(--cobalto);background:var(--azulejo)}
+.tabs-carta button[aria-selected=true]{background:var(--cobalto);border-color:var(--cobalto);color:#fff}
+.panel-carta{columns:2;column-gap:3rem}
+.panel-carta[hidden]{display:none}
+.panel-carta .sec{break-inside:avoid}
+.carta-cols{display:block}
+.marca img{height:40px;width:auto}
+@media (max-width:900px){.panel-carta{columns:1}}
+@media (max-width:640px){.tabs-carta{top:3.6rem}}
