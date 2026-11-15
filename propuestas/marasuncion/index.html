@@ -124,18 +124,31 @@
   <p class="b-sede">Va a la sede <b data-sede-nombre>Surco</b>. Puedes cambiarla arriba en la página.</p>
   <ul id="bolsa-items" class="b-items"></ul>
   <p class="b-total">Total <b data-total>S/ 0.00</b></p>
-  <form id="bolsa-form" class="form" novalidate>
+  <form id="bolsa-form" class="form" data-dias="023456" data-desde="08:00" data-hasta="15:00" novalidate>
     <fieldset class="modo"><legend>¿Cómo lo quieres?</legend>
       <label><input type="radio" name="modo" value="recojo" checked> Recojo en tienda</label>
       <label><input type="radio" name="modo" value="delivery"> Delivery</label>
     </fieldset>
     <p id="bolsa-minimo" class="b-min" role="alert" hidden></p>
     <label id="campo-direccion" hidden>Dirección de entrega<input name="direccion" autocomplete="street-address"></label>
+    <fieldset class="modo"><legend>¿Para cuándo?</legend>
+      <label><input type="radio" name="cuando" value="ya" checked> Lo antes posible</label>
+      <label><input type="radio" name="cuando" value="programar"> Programar</label>
+    </fieldset>
+    <p class="b-cerrado" data-cerrado role="status" hidden></p>
+    <div id="campo-programar" class="b-prog" hidden><label>Día<select name="dia"></select></label><label>Hora<select name="hora"></select></label></div>
+    <fieldset class="modo"><legend>¿Cómo pagas?</legend>
+      <label><input type="radio" name="pago" value="Yape" checked> Yape</label>
+      <label><input type="radio" name="pago" value="Plin"> Plin</label>
+      <label><input type="radio" name="pago" value="Efectivo"> Efectivo</label>
+    </fieldset>
+    <label id="campo-vuelto" hidden>¿Con cuánto pagas? (opcional)<input name="vuelto" inputmode="decimal" placeholder="Ej. 100"></label>
     <label>Nombre<input name="nombre" autocomplete="name" required></label>
     <label>Nota (opcional)<input name="nota" placeholder="Más sarsa, sin ají…"></label>
-    <p class="b-legal">El costo del delivery lo confirma la sede por WhatsApp.</p>
+    <p class="b-legal">El costo del delivery lo confirma la sede por WhatsApp. Si pagas con Yape o Plin, te pasan el número al confirmar por WhatsApp.</p>
     <button class="btn rojo" type="submit">Enviar pedido por WhatsApp</button>
   </form>
 </dialog>
+<script type="application/json" id="opciones-carta">{"reglas": [{"en": "#p-combos,#p-carne-al-peso,.combos", "grupos": [{"t": "¿Le sumas algo?", "tipo": "varios", "max": 4, "desde": "#p-complementos", "filtro": "^(Sarsa|Camote|Tamal personal|Media porción de relleno|Pan francés grande)$"}]}, {"en": "#p-sandwiches", "grupos": [{"t": "¿Le sumas algo?", "tipo": "varios", "max": 3, "desde": "#p-complementos", "filtro": "^(Sarsa|Camote|Carnecita)$"}, {"t": "¿Algo para tomar?", "tipo": "varios", "max": 2, "desde": "#p-bebidas", "filtro": "^(Café|Gaseosa|Jugo de naranja|Jugo de papaya)$"}]}, {"nombre": "^Jugo de 2 frutas$", "grupos": [{"t": "Tus 2 frutas", "tipo": "varios", "min": 2, "max": 2, "ops": ["Naranja", "Fresa", "Piña", "Papaya", "Mango"]}]}, {"nombre": "^Anís o manzanilla$", "grupos": [{"t": "Elige", "tipo": "uno", "ops": ["Anís", "Manzanilla"]}]}, {"nombre": "^Gaseosa$", "grupos": [{"t": "Sabor", "tipo": "uno", "ops": ["Inca Kola", "Coca Cola"]}]}]}</script>
 </body>
 </html>

@@ -159,3 +159,23 @@ html:not(.js) .pane-t{display:block;font-size:1.5rem;margin:1.5rem 0 .75rem;colo
   .aviso{bottom:4.5rem}
 }
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition-duration:0s!important;animation:none!important}}
+
+/* Ficha del plato, horario y pago del pedido */
+.ficha{--ac:var(--achiote)}
+.ficha .f-foto{display:block;width:100%;aspect-ratio:16/10;object-fit:cover;height:auto}
+.ficha .f-base{margin:0;opacity:.85}
+.ficha .f-grupo{flex-direction:column;flex-wrap:nowrap;gap:0}
+.ficha .f-grupo legend small{font-weight:400;opacity:.75}
+.ficha .f-grupo label{gap:.6rem;min-height:44px;border-bottom:1px dashed color-mix(in srgb,currentColor 20%,transparent)}
+.ficha .f-grupo input{accent-color:var(--ac)}
+.ficha .f-grupo input:disabled+span{opacity:.45}
+.ficha .f-precio{margin-left:auto;font-variant-numeric:tabular-nums;opacity:.8;white-space:nowrap}
+.ficha .f-pie{position:sticky;bottom:0;display:flex;gap:.75rem;align-items:center;padding:.75rem 0 .25rem;background:inherit}
+.ficha .f-pie .btn{flex:1}
+.ficha .b-cant button:disabled{opacity:.4}
+.ficha .form{background:inherit}
+.b-ops{display:block;font-size:.82rem;font-weight:400;opacity:.75}
+.b-prog{display:grid;grid-template-columns:1.3fr 1fr;gap:.75rem}
+.b-cerrado{margin:0;padding:.6rem .8rem;font-weight:600;font-size:.92rem;border-left:3px solid var(--achiote);background:color-mix(in srgb,var(--achiote) 12%,transparent)}
+.modo input:disabled+*,.modo label:has(input:disabled){opacity:.5}
+.cnt{margin-left:.4rem;font-size:.78em;font-weight:600;opacity:.6;font-variant-numeric:tabular-nums}
