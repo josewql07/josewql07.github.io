@@ -214,3 +214,21 @@ html:not(.js) .pane-t{display:block;font-size:1.5rem;margin:1.5rem 0 .75rem;colo
 .pie-izq{display:grid;gap:1.5rem}
 @media (min-width:820px){.pie-in{grid-template-columns:1.1fr 1fr;align-items:start}}
 @media (prefers-reduced-motion:reduce){.pie-det summary::after,.pie-wa{transition:none}}
+
+/* Accesibilidad y teclado (auditoría 15-11-2026) */
+.saltar{position:fixed;left:1rem;top:-120px;z-index:300;padding:.8rem 1.2rem;border-radius:8px;background:#fff;color:#111;font-weight:700;text-decoration:none;box-shadow:0 8px 24px rgba(0,0,0,.3)}
+.saltar:focus{top:1rem;outline:3px solid #111;outline-offset:2px}
+main:focus{outline:none}
+.form input:focus,.form select:focus,.form textarea:focus{outline:3px solid var(--achiote);outline-offset:2px}
+.pie :focus-visible{outline-color:var(--pie-acc)}
+.rv:focus-within{opacity:1!important;transform:none!important;transition:none!important}
+.marca{min-height:44px}
+.cnt{font-size:.75rem;opacity:.8}
+.b-cerrado{border-left:0;border-radius:8px}
+.pie-det summary{padding-block:.55rem}
+.pie-det a{display:inline-flex;align-items:center;min-height:44px}
+.pie-det ol{padding-top:.2rem}
+/* Rojo de marca un poco más profundo: blanco y crema sobre él pasan de 4,4:1 a más de 4,5:1 */
+:root{--achiote:#C81D15}
+.form input:focus-within,.form select:focus-within{outline:3px solid var(--achiote);outline-offset:2px}
+.pie-det a{min-width:44px}
