@@ -2,144 +2,215 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
-<meta name="robots" content="noindex, follow">
+<meta name="robots" content="noindex, nofollow">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-qOhFsq0QMV2REqNwk5hGH5bZE9SkX6gt6yeyKdYPv+U=' 'sha256-NW9bhIDsKUIL7W+rXn2Pzw3yxtfXWZT735imxjennLE='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<link rel="preload" href="assets/fonts/bodoni-moda.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/hanken-grotesk.woff2" as="font" type="font/woff2" crossorigin>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>El Filo Barbería</title>
-<meta name="description" content="Barbería clásica desde 2011. Cortes, fades y afeitado con navaja. Reserva tu turno por WhatsApp.">
-<meta name="theme-color" content="#12100E">
-<script>document.documentElement.classList.add("js")</script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Antonio:wght@600;700&family=Manrope:wght@400;500;600;700&display=swap">
-<link rel="stylesheet" href="styles.css?v=20261108">
-<script defer src="main.js?v=20261108"></script>
-<!-- seo:inicio -->
-<link rel="canonical" href="https://wentoqleao.github.io/el-filo-barberia/">
-<meta property="og:type" content="business.business">
+<title>El Filo Barbería · Barbería en Av. Principal 528, Lima</title>
+<meta name="description" content="Barbería en Av. Principal 528, Lima, a una cuadra del parque. Cortes, fade, barba y afeitado con toalla caliente. Reserva tu turno por WhatsApp o ven sin cita.">
+<meta name="theme-color" content="#232527">
+<link rel="icon" href="assets/img/icono.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
 <meta property="og:locale" content="es_PE">
-<meta property="og:title" content="El Filo Barbería · Cortes, fades y navaja (demo)">
-<meta property="og:description" content="Barbería clásica desde 2011. Cortes, fades y afeitado con navaja. Reserva tu turno por WhatsApp.">
+<meta property="og:title" content="El Filo Barbería · Barbería en Av. Principal 528, Lima">
+<meta property="og:description" content="Barbería en Av. Principal 528, Lima, a una cuadra del parque. Cortes, fade, barba y afeitado con toalla caliente. Reserva tu turno por WhatsApp o ven sin cita.">
 <meta property="og:url" content="https://wentoqleao.github.io/el-filo-barberia/">
 <meta property="og:image" content="https://wentoqleao.github.io/el-filo-barberia/assets/img/og.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BarberShop","name":"El Filo Barbería","url":"https://wentoqleao.github.io/el-filo-barberia/","priceRange":"S/ 25 - S/ 60","address":{"@type":"PostalAddress","streetAddress":"Av. Principal 456","addressLocality":"Lima","addressRegion":"Lima","addressCountry":"PE"},"openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],"opens":"10:00","closes":"21:00"},{"@type":"OpeningHoursSpecification","dayOfWeek":["Sunday"],"opens":"10:00","closes":"15:00"}],"image":"https://wentoqleao.github.io/el-filo-barberia/assets/img/og.jpg"}</script>
-<!-- seo:fin -->
+<script>document.documentElement.classList.add("js")</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "HairSalon", "name": "El Filo Barbería", "url": "https://wentoqleao.github.io/el-filo-barberia/", "image": "https://wentoqleao.github.io/el-filo-barberia/assets/img/og.jpg", "description": "Barbería en Av. Principal 528, Lima, a una cuadra del parque. Cortes, fade, barba y afeitado con toalla caliente. Reserva tu turno por WhatsApp o ven sin cita.", "priceRange": "S/", "address": {"@type": "PostalAddress", "streetAddress": "Av. Principal 528", "addressLocality": "Lima", "addressRegion": "Lima", "addressCountry": "PE"}, "openingHoursSpecification": [{"@type": "OpeningHoursSpecification", "dayOfWeek": ["Sunday", "Monday", "Tuesday"], "opens": "10:00", "closes": "20:00"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": ["Wednesday", "Thursday", "Friday", "Saturday"], "opens": "10:00", "closes": "21:00"}], "paymentAccepted": "Efectivo, tarjeta de débito, tarjeta de crédito, pago móvil"}</script>
+<link rel="stylesheet" href="styles.css?v=20261115a">
+<script defer src="reserva.js?v=20261115a"></script>
 </head>
-<body>
-<a class="skip" href="#contenido">Saltar al contenido</a>
-<header class="nav" data-nav>
-  <div class="wrap nav-in">
-    <a class="logo" href="#inicio"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M6 26 26 6M10 8l14 14"/><circle cx="8" cy="24" r="3.5"/><circle cx="24" cy="24" r="3.5"/></svg><span>El Filo<small>Barbería clásica</small></span></a>
-    <nav class="nav-links" aria-label="Secciones">
-      <a href="#servicios">Servicios</a><a href="#cortes">Cortes</a><a href="#equipo">Equipo</a><a href="#reserva">Reserva</a>
-    </nav>
-    <a class="btn" href="#reserva">Reservar turno</a>
-  </div>
+<body data-wa="51933952330" data-local="El Filo Barbería" data-slug="el-filo-barberia" data-horario='{"0": [10, 20], "1": [10, 20], "2": [10, 20], "3": [10, 21], "4": [10, 21], "5": [10, 21], "6": [10, 21]}'>
+<div class="apertura" data-apertura aria-hidden="true">
+  <div class="aro"><svg viewBox="0 0 200 200"><ellipse class="aro-a" cx="100" cy="100" rx="78" ry="78"/><ellipse class="aro-b" cx="100" cy="100" rx="78" ry="34"/></svg></div>
+  <p class="apertura-nombre">El Filo</p>
+</div>
+<a class="saltar" href="#contenido" data-en="Skip to content">Saltar al contenido</a>
+<aside aria-label="Aviso de la demo"><p class="propuesta">Demo de diseño con un negocio de ejemplo. Hecha por Jose Aylas Gutierrez. <a href="https://wa.me/51933952330">Quiero una así</a></p></aside>
+<header class="cabecera">
+  <a class="marca" href="#inicio" aria-label="El Filo Barbería, inicio"><span class="marca-aro" aria-hidden="true"></span><span class="marca-txt">El Filo<small>Barber shop</small></span></a>
+  <nav class="menu" aria-label="Secciones">
+    <a href="#servicios" data-en="Services">Servicios</a>
+    <a href="#local" data-en="The shop">El local</a>
+    <a href="#llegar" data-en="Find us">Cómo llegar</a>
+  </nav>
+  <button type="button" class="idioma" data-idioma aria-label="Change language to English" data-en-aria="Cambiar idioma a español"><span lang="en" data-en="ES">EN</span></button>
+  <a class="btn btn-oro btn-cab" href="#reservar" data-en="Book">Reservar</a>
 </header>
 
 <main id="contenido">
-  <section class="hero" id="inicio" style="padding:0">
-    <div class="hero-mesh" aria-hidden="true"></div>
-    <div class="wrap hero-in">
-      <div>
-        <div class="hero-meta"><span class="status" data-status><i></i><span>Lunes a sábado de 10:00 a 21:00</span></span><span>Av. Principal 456</span></div>
-        <h1><span class="line"><span>Corte</span></span><span class="line"><span>clásico,</span></span><span class="line"><span class="brass">navaja caliente.</span></span></h1>
-        <p class="lead">Barbería de barrio desde 2011. Reservas tu turno en un minuto, llegas y te sientas. Sin esperas.</p>
-        <div class="ctas">
-          <a class="btn" href="#reserva">Reservar turno</a>
-          <a class="btn btn-ghost" href="#servicios">Ver precios</a>
-        </div>
-        <div class="rating"><b>4,9</b><div><div class="stars" aria-label="5 estrellas">★★★★★</div>320 reseñas en Google</div></div>
-      </div>
-      <div class="hero-photo"><div class="frame"><div class="ph" data-label="Foto: Barbero trabajando"><img src="assets/img/hero.webp" alt="Barbero haciendo un fade con máquina" loading="lazy" onerror="this.remove()"></div></div><span class="tag">Desde 2011</span></div>
+<section class="hero" id="inicio">
+  <div class="hero-txt">
+    <p class="estado" data-estado><span class="punto"></span><span data-estado-txt>Av. Principal 528, Lima</span></p>
+    <h1 data-en="Cuts and beard trims a block from the park.">Cortes y barba a una cuadra del parque.</h1>
+    <p class="hero-lead" data-en="Barbershop at Av. Principal 528, Lima. Book your slot on WhatsApp or walk in. We’ll offer you something to drink while you wait.">Barbería en Av. Principal 528, Lima. Separa tu turno por WhatsApp o ven sin cita: mientras esperas, te invitamos algo de tomar.</p>
+    <div class="hero-acc">
+      <a class="btn btn-oro" href="#reservar"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/></svg><span data-en="Book my slot">Reservar mi turno</span></a>
+      <a class="btn btn-linea" href="https://www.google.com/maps/search/?api=1&query=Lima+Per%C3%BA" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.5"/></svg><span data-en="Directions">Cómo llegar</span></a>
     </div>
-  </section>
+    
+  </div>
+  <figure class="marco hero-foto">
+    <img src="assets/img/salon.webp" width="1165" height="777" alt="Salón de El Filo: sillas negras de barbero frente a espejos con marco dorado y lámparas de aro" fetchpriority="high">
+  </figure>
+</section>
 
-  <section id="servicios">
-    <div class="wrap serv-grid">
-      <div class="serv-head reveal">
-        <p class="kicker">Servicios y precios</p>
-        <h2 class="sec-title">Lo que <span>hacemos</span> bien.</h2>
-        <p class="lead">Precios en soles, con lavado incluido. El tiempo es aproximado y ya cuenta el acabado.</p>
-      </div>
-      <ul class="serv-list">
-          <li class="serv reveal" style="--d:0ms"><h3>Corte clásico<span class="min">40 min</span></h3><span class="price">S/ 25</span><p>Tijera y máquina, lavado y peinado con producto.</p></li>
-          <li class="serv reveal" style="--d:60ms"><h3>Fade o degradado<span class="min">45 min</span></h3><span class="price">S/ 30</span><p>Degradado bajo, medio o alto, terminado a navaja.</p></li>
-          <li class="serv reveal" style="--d:120ms"><h3>Corte y barba<span class="min">60 min</span></h3><span class="price">S/ 40</span><p>El combo completo: corte, perfilado y toalla caliente.</p></li>
-          <li class="serv reveal" style="--d:180ms"><h3>Afeitado con navaja<span class="min">35 min</span></h3><span class="price">S/ 30</span><p>Toalla caliente, espuma a brocha y bálsamo final.</p></li>
-          <li class="serv reveal" style="--d:240ms"><h3>Perfilado de barba<span class="min">20 min</span></h3><span class="price">S/ 18</span><p>Forma, contornos a navaja y aceite para barba.</p></li>
-          <li class="serv reveal" style="--d:300ms"><h3>Corte niño<span class="min">30 min</span></h3><span class="price">S/ 20</span><p>Para menores de 12 años, con paciencia incluida.</p></li>
-      </ul>
+<section class="servicios" id="servicios" aria-labelledby="t-serv">
+  <div class="sec-cab">
+    <h2 id="t-serv" data-en="What we do">Lo que hacemos</h2>
+    <p data-en="Pick a service and book it in a minute. Prices are confirmed in the chat.">Elige un servicio y resérvalo en un minuto. El precio te lo confirmamos por el chat.</p>
+  </div>
+  <div class="serv-grid">
+    <ul class="serv-lista">
+<li class="serv">
+  <div><h3 data-en="Haircut">Corte de cabello</h3><p data-en="Classic, scissors or clippers. Show us a photo and we build it with you.">Clásico, con tijera o a máquina. Nos muestras una foto y lo armamos contigo.</p></div>
+  <button type="button" class="btn-linea" data-elegir="corte" aria-label="Reservar Corte de cabello" data-en-aria="Book Haircut" data-en="Book">Reservar</button>
+</li>
+<li class="serv">
+  <div><h3 data-en="Fade">Degradado (fade)</h3><p data-en="Low, mid or high fade, taper and razor designs.">Low, mid o high fade, taper y diseños con navaja.</p></div>
+  <button type="button" class="btn-linea" data-elegir="fade" aria-label="Reservar Degradado (fade)" data-en-aria="Book Fade" data-en="Book">Reservar</button>
+</li>
+<li class="serv">
+  <div><h3 data-en="Haircut and beard">Corte y barba</h3><p data-en="The usual combo: haircut, beard line-up and a razor finish.">El combo de siempre: corte, perfilado de barba y acabado con navaja.</p></div>
+  <button type="button" class="btn-linea" data-elegir="corte-barba" aria-label="Reservar Corte y barba" data-en-aria="Book Haircut and beard" data-en="Book">Reservar</button>
+</li>
+<li class="serv">
+  <div><h3 data-en="Beard trim">Perfilado de barba</h3><p data-en="Shape, outline and razor, with beard care products.">Forma, contorno y navaja, con productos para barba.</p></div>
+  <button type="button" class="btn-linea" data-elegir="barba" aria-label="Reservar Perfilado de barba" data-en-aria="Book Beard trim" data-en="Book">Reservar</button>
+</li>
+<li class="serv">
+  <div><h3 data-en="Hot towel shave">Afeitado con toalla caliente</h3><p data-en="Steam, hot towel and a straight razor for a close shave.">Vapor, toalla caliente y navaja para un afeitado al ras.</p></div>
+  <button type="button" class="btn-linea" data-elegir="afeitado" aria-label="Reservar Afeitado con toalla caliente" data-en-aria="Book Hot towel shave" data-en="Book">Reservar</button>
+</li>
+<li class="serv">
+  <div><h3 data-en="Kids haircut">Corte para niños</h3><p data-en="Patient barbers, same chair as dad.">Con paciencia y en la misma silla de papá.</p></div>
+  <button type="button" class="btn-linea" data-elegir="ninos" aria-label="Reservar Corte para niños" data-en-aria="Book Kids haircut" data-en="Book">Reservar</button>
+</li>
+    </ul>
+    <div class="galeria" aria-label="Trabajos del local">
+      <figure><img src="assets/img/corte-clasico.webp" width="600" height="800" loading="lazy" alt="Corte clásico con raya y degradado bajo"></figure>
+      <figure><img src="assets/img/corte-fade.webp" width="600" height="800" loading="lazy" alt="Degradado alto con textura arriba"></figure>
+      <figure><img src="assets/img/afeitado.webp" width="600" height="800" loading="lazy" alt="Afeitado con vapor y toalla caliente"></figure>
+      <figure><img src="assets/img/corte-barba.webp" width="600" height="800" loading="lazy" alt="Corte con barba perfilada"></figure>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section class="gal" id="cortes">
-    <div class="wrap gal-head reveal">
-      <div><p class="kicker">Trabajos recientes</p><h2 class="sec-title">Cortes de <span>la semana.</span></h2></div>
-      <div class="gal-ctrl"><button type="button" data-dir="-1" aria-label="Anterior">←</button><button type="button" data-dir="1" aria-label="Siguiente">→</button></div>
-    </div>
-    <div class="track" data-track tabindex="0" aria-label="Galería de cortes">
-        <figure class="shot"><div class="ph" data-label="Foto: Fade"><img src="assets/img/fade.webp" alt="Fade: Degradado alto" loading="lazy" onerror="this.remove()"></div><figcaption><b>Fade</b><span>Degradado alto</span></figcaption></figure>
-        <figure class="shot"><div class="ph" data-label="Foto: Clásico"><img src="assets/img/clasico.webp" alt="Clásico: Raya al costado" loading="lazy" onerror="this.remove()"></div><figcaption><b>Clásico</b><span>Raya al costado</span></figcaption></figure>
-        <figure class="shot"><div class="ph" data-label="Foto: Barba"><img src="assets/img/barba.webp" alt="Barba: Perfilado completo" loading="lazy" onerror="this.remove()"></div><figcaption><b>Barba</b><span>Perfilado completo</span></figcaption></figure>
-        <figure class="shot"><div class="ph" data-label="Foto: Navaja"><img src="assets/img/navaja.webp" alt="Navaja: Afeitado tradicional" loading="lazy" onerror="this.remove()"></div><figcaption><b>Navaja</b><span>Afeitado tradicional</span></figcaption></figure>
-        <figure class="shot"><div class="ph" data-label="Foto: Texturizado"><img src="assets/img/texturizado.webp" alt="Texturizado: Corte con volumen" loading="lazy" onerror="this.remove()"></div><figcaption><b>Texturizado</b><span>Corte con volumen</span></figcaption></figure>
-        <figure class="shot"><div class="ph" data-label="Foto: Niños"><img src="assets/img/nino.webp" alt="Niños: Corte infantil" loading="lazy" onerror="this.remove()"></div><figcaption><b>Niños</b><span>Corte infantil</span></figcaption></figure>
-    </div>
-  </section>
+<section class="local" id="local" aria-labelledby="t-local">
+  <div class="local-txt">
+    <h2 id="t-local" data-en="With or without an appointment">Con cita o sin cita</h2>
+    <p data-en="If you’re in the area, walk in: if a chair is free, we take you right away. With a booking, your chair is waiting.">Si estás por la zona, pasa: si hay silla libre, te atendemos al toque. Con reserva, tu silla te espera.</p>
+    <ul class="ventajas">
+      <li data-en="Something to drink while you wait">Algo de tomar mientras esperas</li>
+      <li data-en="Hair wash included if you need it">Lavado si lo necesitas</li>
+      <li data-en="Cash, debit, credit and mobile payments">Efectivo, débito, crédito y pago con el celular</li>
+      <li data-en="Kids welcome">Niños bienvenidos</li>
+    </ul>
+    <table class="horario" aria-label="Horario de atención">
+      <caption data-en="Opening hours">Horario</caption>
+      <tbody>
+<tr data-dia="1"><th scope="row" data-en="Monday">Lunes</th><td>10:00 a 20:00</td></tr>
+<tr data-dia="2"><th scope="row" data-en="Tuesday">Martes</th><td>10:00 a 20:00</td></tr>
+<tr data-dia="3"><th scope="row" data-en="Wednesday">Miércoles</th><td>10:00 a 21:00</td></tr>
+<tr data-dia="4"><th scope="row" data-en="Thursday">Jueves</th><td>10:00 a 21:00</td></tr>
+<tr data-dia="5"><th scope="row" data-en="Friday">Viernes</th><td>10:00 a 21:00</td></tr>
+<tr data-dia="6"><th scope="row" data-en="Saturday">Sábado</th><td>10:00 a 21:00</td></tr>
+<tr data-dia="0"><th scope="row" data-en="Sunday">Domingo</th><td>10:00 a 20:00</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="local-der">
+    
+    <figure class="chat" aria-label="Ejemplo de reserva que llega al WhatsApp del local">
+      <figcaption data-en="This is how a booking arrives on the shop’s WhatsApp">Así llega una reserva al WhatsApp del local</figcaption>
+      <p class="burbuja">Hola El Filo Barbería, quiero reservar un turno.<br>Servicio: Corte y barba<br>Día: sábado 21/11<br>Hora: 11:30<br>Nombre: Luis</p>
+      <p class="burbuja suya" data-en="Done Luis, your chair is ready at 11:30 ✂️">Listo Luis, te esperamos a las 11:30 ✂️</p>
+    </figure>
+  </div>
+</section>
 
-  <section id="equipo">
-    <div class="wrap">
-      <div class="reveal"><p class="kicker">El equipo</p><h2 class="sec-title">Tres sillas, <span>tres manos.</span></h2></div>
-      <div class="team">
-        <article class="barber reveal" data-tilt style="--d:0ms"><div class="ph" data-label="Foto: Barbero Lucho"><img src="assets/img/barbero-lucho.webp" alt="Retrato de Lucho" loading="lazy" onerror="this.remove()"></div><div class="barber-body"><h3>Lucho</h3><p class="role">Fundador, 15 años de oficio</p><p>Abrió El Filo en 2011. Especialista en cortes clásicos y en clientes que no saben qué pedir.</p></div></article>
-        <article class="barber reveal" data-tilt style="--d:100ms"><div class="ph" data-label="Foto: Barbero Kevin"><img src="assets/img/barbero-kevin.webp" alt="Retrato de Kevin" loading="lazy" onerror="this.remove()"></div><div class="barber-body"><h3>Kevin</h3><p class="role">Fades y diseños</p><p>El de las líneas perfectas. Si quieres un degradado limpio o un diseño, es tu barbero.</p></div></article>
-        <article class="barber reveal" data-tilt style="--d:200ms"><div class="ph" data-label="Foto: Barbero Diego"><img src="assets/img/barbero-diego.webp" alt="Retrato de Diego" loading="lazy" onerror="this.remove()"></div><div class="barber-body"><h3>Diego</h3><p class="role">Barba y navaja</p><p>Toalla caliente, navaja y paciencia. Deja la barba como recién salida de revista.</p></div></article>
+<section class="reservar" id="reservar" aria-labelledby="t-res">
+  <div class="sec-cab">
+    <h2 id="t-res" data-en="Book your slot">Reserva tu turno</h2>
+    <p data-en="Your booking arrives at our WhatsApp. We reply to confirm the time.">Tu reserva llega a nuestro WhatsApp. Te respondemos para confirmar la hora.</p>
+  </div>
+  <form class="form-res" id="form-res" novalidate>
+    <div class="pasos">
+    <fieldset>
+      <legend data-en="1. What do you need?">1. ¿Qué te hacemos?</legend>
+      <div class="chips">
+<label class="chip"><input type="checkbox" name="servicio" value="corte" data-es="Corte de cabello" data-en-val="Haircut"><span data-en="Haircut">Corte de cabello</span></label>
+<label class="chip"><input type="checkbox" name="servicio" value="fade" data-es="Degradado (fade)" data-en-val="Fade"><span data-en="Fade">Degradado (fade)</span></label>
+<label class="chip"><input type="checkbox" name="servicio" value="corte-barba" data-es="Corte y barba" data-en-val="Haircut and beard"><span data-en="Haircut and beard">Corte y barba</span></label>
+<label class="chip"><input type="checkbox" name="servicio" value="barba" data-es="Perfilado de barba" data-en-val="Beard trim"><span data-en="Beard trim">Perfilado de barba</span></label>
+<label class="chip"><input type="checkbox" name="servicio" value="afeitado" data-es="Afeitado con toalla caliente" data-en-val="Hot towel shave"><span data-en="Hot towel shave">Afeitado con toalla caliente</span></label>
+<label class="chip"><input type="checkbox" name="servicio" value="ninos" data-es="Corte para niños" data-en-val="Kids haircut"><span data-en="Kids haircut">Corte para niños</span></label>
       </div>
+      <p class="error" id="err-serv" hidden data-en="Choose at least one service.">Elige al menos un servicio.</p>
+    </fieldset>
+    <fieldset>
+      <legend data-en="2. Which day?">2. ¿Qué día?</legend>
+      <div class="chips" id="dias" role="radiogroup" aria-label="Día"></div>
+    </fieldset>
+    <fieldset>
+      <legend data-en="3. What time?">3. ¿A qué hora?</legend>
+      <div class="chips horas" id="horas"></div>
+      <p class="nota" id="sin-horas" hidden data-en="No more slots today. Pick another day.">Hoy ya no quedan turnos. Elige otro día.</p>
+      <p class="error" id="err-hora" hidden data-en="Choose a time.">Elige una hora.</p>
+    </fieldset>
     </div>
-  </section>
+    <div class="cierre">
+    <fieldset class="datos">
+      <legend data-en="4. Your details">4. Tus datos</legend>
+      <label><span data-en="Your name">Tu nombre</span><input name="nombre" id="nombre" autocomplete="given-name" required maxlength="40"></label>
+      <label><span data-en="Barber (optional)">Barbero (opcional)</span><input name="barbero" id="barbero" maxlength="30" placeholder="El que esté libre" data-en-ph="Whoever is free"></label>
+      <label class="ancho"><span data-en="Anything else? (optional)">¿Algo más? (opcional)</span><input name="nota" id="nota" maxlength="120" placeholder="Ej.: traigo foto del corte" data-en-ph="E.g.: I’ll bring a photo of the cut"></label>
+      <p class="error" id="err-nombre" hidden data-en="Write your name.">Escribe tu nombre.</p>
+    </fieldset>
+    <div class="resumen" aria-live="polite">
+      <p class="resumen-tit" data-en="Your booking">Tu reserva</p>
+      <p id="resumen" data-en="Pick service, day and time.">Elige servicio, día y hora.</p>
+      <button class="btn btn-oro" type="submit"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11.6a8.2 8.2 0 0 1-12.1 7.2L4 20l1.3-3.8A8.2 8.2 0 1 1 20 11.6Z"/><path d="M9 8.6c.2-.4.5-.4.8-.4h.5c.2 0 .4.1.5.4l.7 1.6c.1.2 0 .5-.1.6l-.5.6c.6 1.1 1.5 2 2.6 2.6l.6-.5c.2-.1.4-.2.6-.1l1.6.7c.3.1.4.3.4.5v.5c0 .3-.1.6-.4.8-.6.5-1.6.6-2.9 0a8.4 8.4 0 0 1-4.3-4.3c-.6-1.3-.5-2.3 0-2.9Z"/></svg><span data-en="Send on WhatsApp">Enviar por WhatsApp</span></button>
+    </div>
+    </div>
+  </form>
+</section>
 
-  <section class="book" id="reserva">
-    <div class="wrap book-grid">
-      <div class="reveal">
-        <p class="kicker">Reserva</p>
-        <h2 class="sec-title">Elige tu <span>turno.</span></h2>
-        <p class="lead" style="margin-top:22px">Completa los datos y se abrirá WhatsApp con tu reserva ya escrita. El barbero te confirma en minutos.</p>
-        <div class="info-list">
-          <div class="info"><h3>Horario</h3>
-            <table class="horas"><tr><td>Lunes a sábado</td><td>10:00 a 21:00</td></tr><tr><td>Domingo</td><td>10:00 a 15:00</td></tr></table></div>
-          <div class="info"><h3>Dónde estamos</h3><address>Av. Principal 456, Tu ciudad, Perú<br>WhatsApp: 999 999 999</address><a class="maps" href="https://maps.google.com/?q=barberia" target="_blank" rel="noopener">Ver en Google Maps</a></div>
-        </div>
-      </div>
-      <form class="form reveal" style="--d:120ms" data-book novalidate>
-        <div class="field"><label for="b-servicio">Servicio</label><select id="b-servicio"><option>Corte clásico</option><option>Fade o degradado</option><option>Corte y barba</option><option>Afeitado con navaja</option><option>Perfilado de barba</option><option>Corte niño</option></select></div>
-        <div class="row2">
-          <div class="field"><label for="b-barbero">Barbero</label><select id="b-barbero"><option>Cualquier barbero</option><option>Lucho</option><option>Kevin</option><option>Diego</option></select></div>
-          <div class="field"><label for="b-nombre">Tu nombre</label><input id="b-nombre" type="text" autocomplete="given-name" placeholder="Ej. Carlos"></div>
-        </div>
-        <div class="row2">
-          <div class="field"><label for="b-dia">Día</label><select id="b-dia"><option>Hoy</option></select></div>
-          <div class="field"><label for="b-hora">Hora</label><select id="b-hora"><option>10:00</option></select></div>
-        </div>
-        <p class="summary" data-summary aria-live="polite">Elige servicio, día y hora.</p>
-        <p class="err" data-err role="alert"></p>
-        <button class="btn" type="submit"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.2 2.2 2.2 0 0 0 .1-1.3c0-.1-.2-.2-.5-.3z"/></svg>Reservar por WhatsApp</button>
-        <p class="ok" data-ok><svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18"/><path d="M12 21l6 6 11-13"/></svg><span>Tu reserva está lista. Si WhatsApp no se abrió, <a data-oklink href="https://wa.me/51999999999?text=Hola%2C%20quiero%20reservar%20un%20corte" target="_blank" rel="noopener">tócalo aquí</a>.</span></p>
-      </form>
+<section class="llegar" id="llegar" aria-labelledby="t-lle">
+  <figure class="marco llegar-foto"><img src="assets/img/fachada.webp" width="1000" height="750" loading="lazy" alt="Fachada con el letrero de El Filo"></figure>
+  <div class="llegar-txt">
+    <h2 id="t-lle" class="dir">Av. Principal 528</h2>
+    <p data-en="Lima, Lima. Look for the barber pole by the door, a block from the park.">Lima, Lima. Busca el poste de barbero junto a la puerta, a una cuadra del parque.</p>
+    <div class="contactos">
+      <a class="btn btn-oro" href="https://www.google.com/maps/search/?api=1&query=Lima+Per%C3%BA" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.5"/></svg><span data-en="Open in Google Maps">Abrir en Google Maps</span></a>
+      <a class="btn btn-linea" href="https://wa.me/51933952330" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11.6a8.2 8.2 0 0 1-12.1 7.2L4 20l1.3-3.8A8.2 8.2 0 1 1 20 11.6Z"/><path d="M9 8.6c.2-.4.5-.4.8-.4h.5c.2 0 .4.1.5.4l.7 1.6c.1.2 0 .5-.1.6l-.5.6c.6 1.1 1.5 2 2.6 2.6l.6-.5c.2-.1.4-.2.6-.1l1.6.7c.3.1.4.3.4.5v.5c0 .3-.1.6-.4.8-.6.5-1.6.6-2.9 0a8.4 8.4 0 0 1-4.3-4.3c-.6-1.3-.5-2.3 0-2.9Z"/></svg><span>WhatsApp 933 952 330</span></a>
+      <a class="btn btn-linea" href="tel:+51933952330"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2Z"/></svg><span data-en="Call 933 952 330">Llamar al 933 952 330</span></a>
     </div>
-  </section>
-  <div class="big" aria-hidden="true">El Filo</div>
+  </div>
+</section>
 </main>
 
-<footer>
-  <div class="wrap foot">
-    <span>© El Filo Barbería. Av. Principal 456. WhatsApp 999 999 999</span>
-    <span>Diseño web: <b>Jose Aylas Gutierrez</b></span>
-  </div>
+<footer class="pie">
+  <div class="pie-marca"><span class="marca-aro" aria-hidden="true"></span><p>El Filo Barbería<br><small>Av. Principal 528, Lima</small></p></div>
+  <nav class="pie-links" aria-label="Enlaces">
+    <a href="#reservar" data-en="Book">Reservar</a>
+    <a href="#servicios" data-en="Services">Servicios</a>
+    
+  </nav>
+  <p class="pie-cred">Negocio de ejemplo para mostrar el diseño. Diseño por Jose Aylas Gutierrez.</p>
 </footer>
-<div class="demo-note">Página de demostración: la barbería, los barberos y las reseñas son de ejemplo.</div>
-<div class="mbook"><span><b>¿Te toca corte?</b>Reserva en un minuto</span><a class="btn" href="#reserva">Reservar</a></div>
+
+<nav class="barra-movil" aria-label="Acciones rápidas">
+  <a href="#reservar"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/></svg><span data-en="Book">Reservar</span></a>
+  <a href="https://wa.me/51933952330" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11.6a8.2 8.2 0 0 1-12.1 7.2L4 20l1.3-3.8A8.2 8.2 0 1 1 20 11.6Z"/><path d="M9 8.6c.2-.4.5-.4.8-.4h.5c.2 0 .4.1.5.4l.7 1.6c.1.2 0 .5-.1.6l-.5.6c.6 1.1 1.5 2 2.6 2.6l.6-.5c.2-.1.4-.2.6-.1l1.6.7c.3.1.4.3.4.5v.5c0 .3-.1.6-.4.8-.6.5-1.6.6-2.9 0a8.4 8.4 0 0 1-4.3-4.3c-.6-1.3-.5-2.3 0-2.9Z"/></svg><span>WhatsApp</span></a>
+  <a href="https://www.google.com/maps/search/?api=1&query=Lima+Per%C3%BA" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.5"/></svg><span data-en="Directions">Llegar</span></a>
+</nav>
+<div class="aviso" id="aviso" role="status" aria-live="polite"></div>
 </body>
 </html>
