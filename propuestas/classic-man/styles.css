@@ -142,6 +142,11 @@ section { padding: clamp(56px, 9vw, 110px) var(--gutter); }
 .resena blockquote { margin: 0; font: 500 1.15rem/1.45 var(--f-tit); }
 .resena figcaption { margin-top: 10px; color: var(--hueso-2); font-size: .88rem; }
 
+.chat { margin: 0; padding: 22px; border-radius: 14px; background: #1b2a26; display: grid; gap: 12px; max-width: 460px; }
+.chat figcaption { color: var(--hueso-2); font-size: .9rem; }
+.burbuja { background: #dcf8c6; color: #111; padding: 12px 14px; border-radius: 12px 12px 4px 12px; justify-self: end; max-width: 88%; font-size: .98rem; line-height: 1.45; }
+.burbuja.suya { background: #fff; border-radius: 12px 12px 12px 4px; justify-self: start; }
+
 /* ---------- Reservar ---------- */
 .reservar { background: var(--tinta); }
 .form-res { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 32px clamp(28px, 4vw, 64px); align-items: start; }
