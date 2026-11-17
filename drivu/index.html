@@ -1,5 +1,10 @@
 <!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"></head><body>
 <title>Drivu Taxi Lima</title>
+<link rel="icon" href="icono/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="icono/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="icono/favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="icono/apple-touch-icon.png">
+<meta name="theme-color" content="#123C85">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@500;700;800;900&family=Atkinson+Hyperlegible:wght@400;700&display=swap">
@@ -616,6 +621,394 @@ footer{padding-bottom:calc(104px + env(safe-area-inset-bottom,0px))}
     <div class="legal"><span>Drivu · Prototipo académico · Lima, 2026</span><span>No es un servicio de taxi en funcionamiento.</span></div>
   </div>
 </footer>
+<!--@@DAB-INICIO@@ Asistente de ayuda (chat guiado). Fuente: ihc/bot-ayuda/ (este bloque lo inserta integrar_landing.py) -->
+<style>
+/* Drivu · Asistente de ayuda: estilos del chat (el sitio define los --dab-*) */
+.dab-log{display:flex;flex-direction:column;gap:10px;padding:16px 14px 8px;overflow-y:auto;overscroll-behavior:contain;font-size:1rem;line-height:1.45;color:var(--dab-ink,#080F1D)}
+.dab-msg{max-width:86%;padding:10px 14px;border-radius:18px;word-wrap:break-word;animation:dab-in .22s ease-out both}
+.dab-bot,.dab-agente{align-self:flex-start;background:var(--dab-surf,#E7EDF7);color:var(--dab-ink,#080F1D);border-bottom-left-radius:6px}
+.dab-agente{box-shadow:inset 3px 0 0 var(--dab-acc,#123C85)}
+.dab-yo{align-self:flex-end;background:var(--dab-me,#123C85);color:var(--dab-me-ink,#FFFFFF);border-bottom-right-radius:6px}
+.dab-quien{display:block;font-size:.78em;font-weight:700;color:var(--dab-muted,#4B6699);margin-bottom:2px;letter-spacing:.01em}
+.dab-txt p{margin:0 0 6px}.dab-txt p:last-child{margin:0}
+.dab-txt ul,.dab-txt ol{margin:4px 0;padding-left:20px}.dab-txt li{margin:2px 0}
+.dab-txt a{color:inherit;font-weight:700}
+.dab-ficha{margin-top:6px;padding:10px 12px;border-radius:12px;background:var(--dab-bg,#FFFFFF);border:1px solid var(--dab-line,#A3B6DE);font-size:.95em}
+.dab-ficha b{display:block}.dab-ficha small{color:var(--dab-muted,#4B6699)}
+.dab-codigo{font-family:ui-monospace,Menlo,Consolas,monospace;font-weight:700;letter-spacing:.04em}
+.dab-esc{display:flex;gap:4px;padding:14px 16px}
+.dab-esc span{width:7px;height:7px;border-radius:50%;background:var(--dab-muted,#4B6699);opacity:.5;animation:dab-pt 1s infinite ease-in-out}
+.dab-esc span:nth-child(2){animation-delay:.15s}.dab-esc span:nth-child(3){animation-delay:.3s}
+@keyframes dab-pt{0%,80%,100%{transform:translateY(0);opacity:.35}40%{transform:translateY(-4px);opacity:.9}}
+@keyframes dab-in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.dab-ctrl{padding:8px 12px 12px;display:flex;flex-direction:column;gap:8px}
+.dab-ctrl:empty{display:none}
+.dab-ops{display:flex;flex-wrap:wrap;gap:8px}
+.dab-op{display:inline-flex;align-items:center;gap:8px;min-height:48px;padding:10px 16px;border-radius:999px;border:1.5px solid var(--dab-acc,#123C85);background:var(--dab-bg,#FFFFFF);color:var(--dab-acc-txt,var(--dab-acc,#123C85));font:inherit;font-size:.97rem;font-weight:700;text-align:left;text-decoration:none;cursor:pointer;line-height:1.2;transition:background-color .15s,color .15s}
+.dab-op svg{flex:none}
+.dab-op:hover{background:var(--dab-hover,#E7EDF7)}
+.dab-op.dab-prin{background:var(--dab-acc,#123C85);color:var(--dab-acc-ink,#FFFFFF)}
+.dab-op.dab-prin:hover{filter:brightness(1.08)}
+.dab-op.dab-sec{border-color:var(--dab-line,#A3B6DE);color:var(--dab-muted,#4B6699);font-weight:600}
+.dab-op.dab-peligro{background:#C62F2B;border-color:#C62F2B;color:#FFFFFF}
+.dab-op:focus-visible,.dab-enviar:focus-visible{outline:3px solid var(--dab-focus,#123C85);outline-offset:2px}
+.dab-libre,.dab-pide{display:flex;gap:8px;align-items:flex-end;flex-wrap:wrap}
+.dab-libre input,.dab-pide textarea{flex:1;min-width:0;min-height:48px;padding:12px 14px;border-radius:24px;border:1.5px solid var(--dab-line,#A3B6DE);background:var(--dab-bg,#FFFFFF);color:var(--dab-ink,#080F1D);font:inherit;font-size:1rem;resize:none}
+.dab-pide textarea{border-radius:16px}
+.dab-libre input:focus,.dab-pide textarea:focus{outline:none;border-color:var(--dab-focus,#123C85);box-shadow:0 0 0 2px var(--dab-focus,#123C85)}
+.dab-pide textarea[aria-invalid=true]{border-color:#C62F2B}
+.dab-enviar{flex:none;width:48px;height:48px;border-radius:50%;border:0;background:var(--dab-acc,#123C85);color:var(--dab-acc-ink,#FFFFFF);display:grid;place-items:center;cursor:pointer}
+.dab-err{flex-basis:100%;margin:0;color:#C62F2B;font-size:.9rem;font-weight:600}
+.dab-err:empty{display:none}
+.dab-sr{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+@media (prefers-reduced-motion:reduce){.dab-msg,.dab-esc span{animation:none}.dab-op{transition:none}}
+.ay-fab{position:fixed;z-index:7;right:max(20px,env(safe-area-inset-right,0px));bottom:calc(96px + env(safe-area-inset-bottom,0px));width:60px;height:60px;border-radius:50%;border:0;background:var(--accent);color:var(--accent-ink);display:grid;place-items:center;box-shadow:0 4px 14px rgba(8,15,29,.28);cursor:pointer;transition:transform .18s ease,box-shadow .18s ease,opacity .18s ease}
+.ay-fab svg{width:30px;height:30px}
+.ay-fab:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(8,15,29,.34)}
+.ay-fab:focus-visible{outline:3px solid var(--focus);outline-offset:4px}
+.ay-fab .ay-burb{position:absolute;right:70px;top:50%;transform:translateY(-50%);white-space:nowrap;background:var(--surface);color:var(--ink);border:1px solid var(--line);padding:8px 12px;border-radius:14px;font:700 .92rem/1.2 inherit;box-shadow:0 4px 14px rgba(8,15,29,.18);pointer-events:none}
+.ay-fab .ay-burb[hidden]{display:none}
+.ay-panel{position:fixed;z-index:9;right:max(20px,env(safe-area-inset-right,0px));bottom:calc(24px + env(safe-area-inset-bottom,0px));width:min(400px,calc(100vw - 40px));height:min(640px,calc(100vh - 48px));height:min(640px,calc(100dvh - 48px));display:flex;flex-direction:column;background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:24px;box-shadow:0 24px 60px -12px rgba(8,15,29,.45);overflow:hidden;
+  --dab-bg:var(--surface);--dab-surf:var(--chip);--dab-ink:var(--ink);--dab-muted:var(--muted);--dab-line:var(--line);--dab-acc:var(--accent);--dab-acc-ink:var(--accent-ink);--dab-acc-txt:var(--link);--dab-me:var(--accent);--dab-me-ink:var(--accent-ink);--dab-hover:var(--chip);--dab-focus:var(--focus)}
+.ay-panel[hidden]{display:none}
+.ay-cab{display:flex;align-items:center;gap:12px;padding:14px 12px 14px 18px;background:var(--dark);color:var(--dark-ink)}
+.ay-cab .ay-av{flex:none;width:40px;height:40px;border-radius:50%;background:#123C85;color:#FFFFFF;display:grid;place-items:center}
+.ay-cab .ay-av svg{width:24px;height:24px}
+.ay-cab>div{flex:1;min-width:0}
+.ay-cab h2{margin:0;font-size:1.08rem;line-height:1.2;color:inherit}
+.ay-cab p{margin:2px 0 0;font-size:.85rem;opacity:.85}
+.ay-cab button{flex:none;width:44px;height:44px;border-radius:50%;border:0;background:transparent;color:inherit;display:grid;place-items:center;cursor:pointer}
+.ay-cab button:hover{background:rgba(231,237,247,.12)}
+.ay-cab button:focus-visible{outline:3px solid #A3B6DE;outline-offset:0}
+.ay-cab button svg{width:22px;height:22px}
+.ay-panel .dab-log{flex:1;min-height:0}
+.ay-panel .dab-ctrl{border-top:1px solid var(--line);max-height:48%;overflow-y:auto;flex:none}
+.ay-aviso{margin:0;padding:6px 14px 0;font-size:.78rem;color:var(--muted);text-align:center}
+@media (max-width:600px){
+  .ay-fab{width:56px;height:56px;right:max(16px,env(safe-area-inset-right,0px));bottom:calc(152px + env(safe-area-inset-bottom,0px))}
+  .ay-fab .ay-burb{display:none}
+  .ay-panel{inset:0;width:auto;height:auto;border-radius:0;border:0;padding-bottom:env(safe-area-inset-bottom,0px)}
+  .ay-cab{padding-top:calc(14px + env(safe-area-inset-top,0px))}
+}
+body.ay-abierto .ay-fab{opacity:0;pointer-events:none}
+@media (max-width:600px){body.ay-abierto{overflow:hidden}}
+@media (prefers-reduced-motion:reduce){.ay-fab,.ay-fab:hover{transition:none;transform:none}}
+</style>
+<button type="button" class="ay-fab" id="ay-fab" aria-haspopup="dialog" aria-controls="ay-panel" aria-expanded="false" aria-label="Abrir el asistente de ayuda">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><path d="M9.5 8.5a2.5 2.5 0 1 1 3.3 2.4c-.5.2-.8.6-.8 1.1v.5"/><path d="M12 14.5h.01"/></svg>
+  <span class="ay-burb" id="ay-burb" aria-hidden="true" hidden>¿Necesitas ayuda?</span>
+</button>
+<div class="ay-panel" id="ay-panel" role="dialog" aria-labelledby="ay-tit" hidden>
+  <div class="ay-cab">
+    <span class="ay-av" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="2.5"/><path d="M12 3v6.5M4.5 15.5l5.3-2.5M19.5 15.5l-5.3-2.5"/></svg></span>
+    <div><h2 id="ay-tit">Ayuda Drivu</h2><p>Respuestas al instante. Si lo necesitas, te atiende una persona.</p></div>
+    <button type="button" id="ay-reini" aria-label="Empezar de nuevo" title="Empezar de nuevo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg></button>
+    <button type="button" id="ay-cerrar" aria-label="Cerrar el asistente" title="Cerrar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+  </div>
+  <div id="ay-log"></div>
+  <p class="ay-aviso">Asistente automático. No compartas contraseñas ni datos de tu tarjeta.</p>
+  <div id="ay-ctrl"></div>
+</div>
+<script>
+/* Drivu · Asistente de ayuda (chat guiado tipo centro de ayuda)
+ * Motor sin dependencias. Flujo: mensaje -> intención -> datos que faltan (slots) -> respuesta.
+ * Se usa en la landing (ventana flotante) y en el prototipo (pantalla de la app).
+ *
+ *   var bot = DrivuAyuda.crear({
+ *     log: elemento donde van los mensajes, ctrl: elemento donde van los botones y la caja de texto,
+ *     nodos: { id: function (bot) { return { di: [...], ops: [...], pide: {...} }; } },
+ *     intenciones: [{ id, ir, ej: ['frases de ejemplo'] }],
+ *     inicio: 'inicio', acciones: { nombre: function (bot, arg) {} }, evento: function (tipo, detalle) {}
+ *   });
+ *
+ * Un nodo devuelve:
+ *   di:   textos del asistente (string, o { html } con HTML ya escapado)
+ *   ops:  botones { t: 'Texto', ir: 'nodo' } o { t, accion: 'nombre', arg } o { t, url } o { t, hum: true }
+ *   pide: { slot: 'nombre', etiqueta: 'Escribe…', min: 3, ir: 'nodo siguiente' }  (pide un dato escrito)
+ *   fin:  true  -> pregunta "¿Te ayudé?" al final
+ */
+var DrivuAyuda = (function () {
+  'use strict';
+  function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+  function sinTildes(s) { return String(s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9ñ ]/g, ' ').replace(/\s+/g, ' ').trim(); }
+  var PARADAS = ' de la el los las un una y o a en mi me con por para que se lo al del es no si ya hay muy mas tu su yo le les como esta este eso fue ';
+  function palabras(s) { return sinTildes(s).split(' ').filter(function (w) { return w.length > 2 && PARADAS.indexOf(' ' + w + ' ') < 0; }); }
+  var lento = typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Clasificador sencillo: compara las palabras del mensaje con las frases de ejemplo de cada intención.
+  function clasificar(texto, intenciones) {
+    var w = palabras(texto); if (!w.length) return null;
+    var mejor = null, punt = 0;
+    intenciones.forEach(function (it) {
+      var p = 0;
+      (it.clave || []).forEach(function (k) { if (sinTildes(texto).indexOf(sinTildes(k)) >= 0) p += 3; });
+      it.ej.forEach(function (e) {
+        var we = palabras(e), c = 0;
+        w.forEach(function (x) { we.forEach(function (y) { if (x === y || (x.length > 4 && y.length > 4 && x.slice(0, 5) === y.slice(0, 5))) c++; }); });
+        if (c) p = Math.max(p, c + (p >= 3 ? 3 : 0));
+      });
+      if (p > punt) { punt = p; mejor = it; }
+    });
+    return punt >= 1 ? mejor : null;
+  }
+
+  function crear(cfg) {
+    var L = cfg.log, C = cfg.ctrl, ocupado = false, fallos = 0, actual = null, tarea = 0, foco = false;
+    var bot = { slots: {}, ctx: cfg.ctx || {}, cfg: cfg, historial: [] };
+    L.classList.add('dab-log'); L.setAttribute('role', 'log'); L.setAttribute('aria-live', 'polite'); L.setAttribute('aria-label', 'Conversación con el asistente de Drivu');
+    C.classList.add('dab-ctrl');
+
+    function evento(t, d) { try { cfg.evento && cfg.evento(t, d); } catch (e) {} }
+    function bajar() { var s = cfg.scroller || L; requestAnimationFrame(function () { s.scrollTop = s.scrollHeight; }); }
+    function burbuja(quien, contenido) {
+      var b = document.createElement('div'); b.className = 'dab-msg dab-' + quien;
+      if (quien === 'bot' || quien === 'agente') {
+        var q = document.createElement('span'); q.className = 'dab-quien'; q.textContent = quien === 'bot' ? (cfg.nombre || 'Asistente Drivu') : (bot.agente || 'Agente Drivu');
+        b.appendChild(q);
+      } else { var q2 = document.createElement('span'); q2.className = 'dab-sr'; q2.textContent = 'Tú: '; b.appendChild(q2); }
+      var c = document.createElement('div'); c.className = 'dab-txt';
+      if (contenido && contenido.html != null) c.innerHTML = contenido.html; else c.textContent = contenido;
+      b.appendChild(c); L.appendChild(b); bajar();
+      bot.historial.push({ quien: quien, texto: c.textContent });
+      return b;
+    }
+    function escribiendo(quien) {
+      var e = document.createElement('div'); e.className = 'dab-msg dab-' + quien + ' dab-esc'; e.setAttribute('aria-hidden', 'true');
+      e.innerHTML = '<span></span><span></span><span></span>'; L.appendChild(e); bajar(); return e;
+    }
+    // Muestra los textos uno por uno con un pequeño "escribiendo…"
+    function decir(lista, quien, listo) {
+      lista = (lista || []).filter(function (x) { return x !== '' && x != null; });
+      var mi = tarea, i = 0;
+      (function sig() {
+        if (mi !== tarea) return;
+        if (i >= lista.length) return listo && listo();
+        var m = lista[i++], e = lento ? null : escribiendo(quien);
+        var largo = typeof m === 'string' ? m.length : 80;
+        setTimeout(function () { if (e) e.remove(); if (mi !== tarea) return; burbuja(quien, m); sig(); }, lento ? 0 : Math.min(1100, 350 + largo * 6));
+      })();
+    }
+    bot.decir = function (lista, listo) { decir(lista, 'bot', listo); };
+    bot.agenteDice = function (lista, listo) { decir(lista, 'agente', listo); };
+
+    function controles(n) {
+      var focoDentro = foco || C.contains(document.activeElement) || (cfg.raiz && cfg.raiz.contains(document.activeElement)); foco = false;
+      C.innerHTML = '';
+      var ops = (n.ops || []).slice();
+      if (n.pide) {
+        var f = document.createElement('form'); f.className = 'dab-pide'; f.noValidate = true;
+        var id = 'dab-in-' + Math.random().toString(36).slice(2, 7);
+        f.innerHTML = '<label class="dab-sr" for="' + id + '">' + esc(n.pide.etiqueta) + '</label>' +
+          '<textarea id="' + id + '" rows="2" maxlength="' + (n.pide.max || 300) + '" placeholder="' + esc(n.pide.etiqueta) + '"></textarea>' +
+          '<button type="submit" class="dab-enviar" aria-label="Enviar">' + ICO.enviar + '</button><p class="dab-err" role="alert"></p>';
+        var ta = f.querySelector('textarea'), er = f.querySelector('.dab-err');
+        ta.addEventListener('keydown', function (e) { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); f.requestSubmit ? f.requestSubmit() : f.dispatchEvent(new Event('submit')); } });
+        f.addEventListener('submit', function (e) {
+          e.preventDefault(); var v = ta.value.trim();
+          if (v.length < (n.pide.min || 2)) { er.textContent = n.pide.error || 'Escribe un poco más para poder ayudarte.'; ta.setAttribute('aria-invalid', 'true'); ta.focus(); return; }
+          bot.slots[n.pide.slot] = v; burbuja('yo', v); evento('dato', n.pide.slot); ir(n.pide.ir);
+        });
+        C.appendChild(f);
+        if (n.pide.saltar) ops.push({ t: n.pide.saltar.t, ir: n.pide.saltar.ir });
+      }
+      if (n.fin) ops = [{ t: 'Sí, me ayudó', csat: 1 }, { t: 'No, sigo con el problema', csat: 0 }];
+      if (actual !== cfg.inicio && !n.sinMenu && !n.fin) ops.push({ t: 'Volver al menú', ir: cfg.inicio, sec: true });
+      if (ops.length) {
+        var g = document.createElement('div'); g.className = 'dab-ops'; g.setAttribute('role', 'group'); g.setAttribute('aria-label', 'Opciones');
+        ops.forEach(function (o) {
+          var el = document.createElement(o.url ? 'a' : 'button');
+          el.className = 'dab-op' + (o.sec ? ' dab-sec' : '') + (o.prin ? ' dab-prin' : '') + (o.peligro ? ' dab-peligro' : '');
+          if (o.url) { el.href = o.url; if (!/^#/.test(o.url)) { el.target = '_blank'; el.rel = 'noopener'; } } else el.type = 'button';
+          el.innerHTML = (o.ico && ICO[o.ico] ? ICO[o.ico] : '') + '<span>' + esc(o.t) + '</span>';
+          el.addEventListener('click', function (e) {
+            if (ocupado) { if (!o.url) e.preventDefault(); return; }
+            burbuja('yo', o.t);
+            if (o.url) { evento('enlace', o.url); if (o.luego) setTimeout(function () { ir(o.luego); }, 50); return; }
+            if (o.csat != null) { evento('satisfaccion', o.csat ? 'si' : 'no'); return ir(o.csat ? '_gracias' : (cfg.siNo || cfg.inicio)); }
+            if (o.accion) { evento('accion', o.accion); var r = cfg.acciones[o.accion](bot, o.arg); if (typeof r === 'string') ir(r); return; }
+            if (o.set) Object.keys(o.set).forEach(function (k) { bot.slots[k] = o.set[k]; });
+            ir(o.ir);
+          });
+          g.appendChild(el);
+        });
+        C.appendChild(g);
+      }
+      if (!n.pide && n.texto !== false) {
+        var t = document.createElement('form'); t.className = 'dab-libre';
+        var tid = 'dab-tx-' + Math.random().toString(36).slice(2, 7);
+        t.innerHTML = '<label class="dab-sr" for="' + tid + '">O escribe tu pregunta</label><input id="' + tid + '" type="text" autocomplete="off" maxlength="200" placeholder="O escribe tu pregunta…"><button type="submit" class="dab-enviar" aria-label="Enviar pregunta">' + ICO.enviar + '</button>';
+        t.addEventListener('submit', function (e) {
+          e.preventDefault(); var inp = t.querySelector('input'), v = inp.value.trim(); if (!v || ocupado) return;
+          burbuja('yo', v); entender(v);
+        });
+        C.appendChild(t);
+      }
+      if (focoDentro) { var p = C.querySelector('textarea, .dab-op, input'); if (p) p.focus({ preventScroll: true }); }
+      bajar();
+    }
+
+    function entender(texto) {
+      var it = clasificar(texto, cfg.intenciones || []);
+      evento('texto', it ? it.id : 'no_entendido');
+      if (it) { fallos = 0; if (it.set) Object.keys(it.set).forEach(function (k) { bot.slots[k] = it.set[k]; }); return ir(it.ir); }
+      fallos++;
+      if (fallos === 1) return mostrar({ di: ['Perdona, no te entendí bien. ¿Tu consulta es sobre alguno de estos temas?'], ops: cfg.sugerencias ? cfg.sugerencias(bot) : [] }, '_noentendi');
+      fallos = 0;
+      return ir(cfg.humano || cfg.inicio, { di0: ['Sigo sin entenderte y no quiero hacerte perder tiempo.'] });
+    }
+
+    function mostrar(n, id) {
+      foco = foco || C.contains(document.activeElement);
+      actual = id; tarea++; ocupado = true; C.innerHTML = ''; C.setAttribute('aria-busy', 'true');
+      var pre = n.di0 || [];
+      decir(pre.concat(n.di || []), n.quien || 'bot', function () {
+        ocupado = false; C.removeAttribute('aria-busy');
+        if (n.despues) n.despues(bot);
+        controles(n);
+      });
+    }
+    function ir(id, extra) {
+      if (id === '_gracias') return mostrar({ di: ['¡Qué bueno! Gracias por contarnos. Si necesitas algo más, aquí estoy.'], ops: [{ t: 'Tengo otra consulta', ir: cfg.inicio }], sinMenu: true }, id);
+      var f = cfg.nodos[id]; if (!f) { console.warn('Nodo no encontrado', id); id = cfg.inicio; f = cfg.nodos[id]; }
+      var n = f(bot) || {}; if (typeof n === 'string') return ir(n);
+      if (extra) n.di0 = extra.di0;
+      evento('nodo', id);
+      mostrar(n, id);
+    }
+    bot.ir = ir;
+    bot.reiniciar = function () { tarea++; L.innerHTML = ''; C.innerHTML = ''; bot.slots = {}; bot.historial = []; fallos = 0; bot.agente = null; ir(cfg.inicio); };
+    bot.esc = esc;
+    return bot;
+  }
+
+  var I = function (d) { return '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">' + d + '</svg>'; };
+  var ICO = {
+    enviar: I('<path d="M5 12h13"/><path d="m13 6 6 6-6 6"/>'),
+    viaje: I('<path d="M5 17h14l-1.5-6.5A2 2 0 0 0 15.6 9H8.4a2 2 0 0 0-1.9 1.5z"/><circle cx="7.5" cy="17.5" r="1.5"/><circle cx="16.5" cy="17.5" r="1.5"/>'),
+    pago: I('<rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18"/>'),
+    cuenta: I('<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>'),
+    escudo: I('<path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6z"/>'),
+    ayuda: I('<circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6V14"/><path d="M12 17h.01"/>'),
+    persona: I('<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>'),
+    libro: I('<path d="M4 4.5A1.5 1.5 0 0 1 5.5 3H19v15H5.5A1.5 1.5 0 0 0 4 19.5z"/><path d="M4 19.5A1.5 1.5 0 0 0 5.5 21H19v-3"/>'),
+    whatsapp: I('<path d="M3 21l1.7-5A8.5 8.5 0 1 1 8 19.3z"/>'),
+    objeto: I('<rect x="4" y="7" width="16" height="13" rx="2"/><path d="M9 7V5a3 3 0 0 1 6 0v2"/>'),
+    telefono: I('<path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/>'),
+    abrir: I('<path d="M14 4h6v6"/><path d="M20 4 10 14"/><path d="M19 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h5"/>')
+  };
+
+  return { crear: crear, clasificar: clasificar, esc: esc, ICO: ICO };
+})();
+/* Drivu · Asistente de ayuda de la landing (visitantes). Aquí no hay sesión ni viajes:
+ * responde dudas y deriva a WhatsApp, al Libro de Reclamaciones o a la app (Mis viajes › Reportar un problema).
+ * H: { proto, libro, wa, foro } enlaces que ya usa la página; ir(ancla) para saltar a una sección.
+ */
+function flujoAyudaLanding(H) {
+  'use strict';
+  var nodos = {
+    inicio: function () {
+      return { di: ['¡Hola! Soy el asistente de Drivu. ¿En qué te puedo ayudar?'], ops: [
+        { t: 'Tuve un problema con un viaje', ir: 'problema', ico: 'viaje', prin: true },
+        { t: 'Qué es Drivu', ir: 'que', ico: 'ayuda' },
+        { t: 'Precios y pagos', ir: 'pagos', ico: 'pago' },
+        { t: 'Seguridad', ir: 'seguridad', ico: 'escudo' },
+        { t: 'Probar la app', ir: 'probar' },
+        { t: 'Hablar con una persona', ir: 'humano', ico: 'persona' }
+      ] };
+    },
+    problema: function () {
+      return { di: ['Lo siento. Para ayudarte mejor, ¿qué pasó?'], ops: [
+        { t: 'Me cobraron de más', ir: 'enApp', set: { tema: 'cobro' } },
+        { t: 'Olvidé algo en el auto', ir: 'enApp', set: { tema: 'objeto' } },
+        { t: 'Problema con el conductor', ir: 'enApp', set: { tema: 'conductor' } },
+        { t: 'Me sentí en peligro', ir: 'peligro', peligro: true },
+        { t: 'Quiero presentar un reclamo formal', ir: 'reclamo', ico: 'libro' }
+      ] };
+    },
+    enApp: function (b) {
+      var t = { cobro: 'revisar el cobro y, si corresponde, devolverte la diferencia', objeto: 'avisarle al conductor para que te devuelva lo que olvidaste', conductor: 'revisar lo que pasó con el conductor' }[b.slots.tema];
+      return { di: ['La forma más rápida es desde la app, porque ahí ya está tu viaje: abre Mis viajes, toca el viaje y luego "Reportar un problema". El asistente de la app te ayuda a ' + t + '.',
+        'Si prefieres, también te atiende una persona por WhatsApp.'],
+        ops: [{ t: 'Abrir la app', url: H.proto, ico: 'abrir', prin: true, luego: 'despuesEnlace' }, { t: 'Escribir por WhatsApp', url: H.wa, ico: 'whatsapp', luego: 'despuesEnlace' }, { t: 'Presentar un reclamo formal', ir: 'reclamo', sec: true }] };
+    },
+    peligro: function () {
+      return { di: ['Tu seguridad es lo primero. Si estás en peligro ahora, llama a la Policía al 105.', 'Dentro de la app, el botón SOS siempre está a la vista: llama al 105 y avisa a tus contactos de confianza con tu ubicación.'],
+        ops: [{ t: 'Llamar al 105', url: 'tel:105', ico: 'telefono', peligro: true }, { t: 'Ya estoy a salvo, quiero reportarlo', ir: 'enApp', set: { tema: 'conductor' } }] };
+    },
+    reclamo: function () {
+      return { di: ['Puedes dejar tu reclamo o queja en nuestro Libro de Reclamaciones virtual. Al enviarlo recibes un código para hacer seguimiento.', 'Reclamo: no estás conforme con el servicio (por ejemplo, un cobro). Queja: no estás conforme con la atención.'],
+        ops: [{ t: 'Abrir el Libro de Reclamaciones', url: H.libro, ico: 'libro', prin: true, luego: 'despuesEnlace' }] };
+    },
+    que: function () {
+      return { di: ['Drivu es una app de taxi que se adapta sola a ti. Si notas que te cuesta un paso, simplifica la pantalla y agranda los botones, sin que tengas que activar nada.',
+        'Está pensada para personas mayores y para quienes recién empiezan a usar apps de taxi. Hoy es un prototipo académico del curso de Interacción Humano Computador.'],
+        ops: [{ t: 'Cómo se adapta', url: '#adapta', luego: 'despuesEnlace' }, { t: 'Probar la app', ir: 'probar' }] };
+    },
+    probar: function () {
+      return { di: ['Puedes probar el prototipo en línea, sin descargar nada. Para entrar rápido usa la cuenta demo@drivu.pe con la contraseña Drivu2026.', 'También hay un video de un minuto que muestra cómo pedir un taxi.'],
+        ops: [{ t: 'Abrir el prototipo', url: H.proto, ico: 'abrir', prin: true, luego: 'despuesEnlace' }, { t: 'Ver el video', url: '#tutorial', luego: 'despuesEnlace' }] };
+    },
+    pagos: function () {
+      return { di: ['Aceptamos todos los medios: efectivo, tarjeta de débito o crédito, Yape, Plin u otra billetera digital. Eliges antes de confirmar el viaje.', 'El precio lo ves antes de confirmar y no cambia durante el viaje, aunque haya tráfico.'],
+        ops: [{ t: 'Me cobraron de más', ir: 'enApp', set: { tema: 'cobro' } }, { t: 'Gracias, eso era todo', ir: '_gracias', sec: true }] };
+    },
+    seguridad: function () {
+      return { di: ['En Drivu el botón SOS siempre está a la vista. Llama a la Policía (105) y avisa a tus contactos de confianza con tu ubicación.', 'Antes de subir ves la foto, el nombre, el auto y la placa de tu conductor.'],
+        ops: [{ t: 'Me sentí en peligro en un viaje', ir: 'peligro', peligro: true }, { t: 'Ver más sobre seguridad', url: '#seguridad', luego: 'despuesEnlace' }] };
+    },
+    humano: function () {
+      return { di: ['Te atiende una persona de nuestro equipo por WhatsApp. Cuéntale tu caso y, si es sobre un viaje, la fecha y el destino.'],
+        ops: [{ t: 'Escribir por WhatsApp', url: H.wa, ico: 'whatsapp', prin: true, luego: 'despuesEnlace' }, { t: 'Prefiero el Libro de Reclamaciones', ir: 'reclamo', sec: true }] };
+    },
+    despuesEnlace: function () { return { di: ['¿Hay algo más en lo que te pueda ayudar?'], ops: [{ t: 'Sí, otra consulta', ir: 'inicio' }, { t: 'No, gracias', ir: '_gracias', sec: true }], sinMenu: true }; }
+  };
+  var intenciones = [
+    { id: 'cobro', ir: 'enApp', set: { tema: 'cobro' }, clave: ['cobraron', 'cobro', 'reembolso', 'devolucion'], ej: ['me cobraron de mas', 'quiero un reembolso', 'devuelvan mi dinero', 'cobro doble'] },
+    { id: 'objeto', ir: 'enApp', set: { tema: 'objeto' }, clave: ['olvide', 'perdi', 'deje mi'], ej: ['olvide mi celular en el taxi', 'perdi algo en el auto'] },
+    { id: 'peligro', ir: 'peligro', clave: ['peligro', 'emergencia', 'robo', 'acoso', 'auxilio'], ej: ['estoy en peligro', 'me asaltaron', 'emergencia'] },
+    { id: 'reclamo', ir: 'reclamo', clave: ['reclamo', 'queja', 'libro'], ej: ['quiero poner un reclamo', 'libro de reclamaciones', 'presentar una queja'] },
+    { id: 'conductor', ir: 'enApp', set: { tema: 'conductor' }, ej: ['el conductor me trato mal', 'problema con el chofer', 'mal servicio'] },
+    { id: 'pagos', ir: 'pagos', clave: ['yape', 'plin', 'tarjeta', 'efectivo', 'precio', 'cuesta', 'tarifa'], ej: ['como pago', 'aceptan yape', 'cuanto cuesta', 'puedo pagar con tarjeta'] },
+    { id: 'que', ir: 'que', ej: ['que es drivu', 'para que sirve', 'como funciona la app', 'se adapta'] },
+    { id: 'probar', ir: 'probar', clave: ['descargar', 'prototipo', 'probar', 'instalar'], ej: ['donde descargo la app', 'quiero probar la app', 'ya esta disponible'] },
+    { id: 'seguridad', ir: 'seguridad', clave: ['sos', 'seguro', 'seguridad'], ej: ['es seguro', 'boton sos', 'contactos de confianza'] },
+    { id: 'conductor_ser', ir: 'humano', ej: ['quiero ser conductor', 'trabajar con ustedes', 'registrarme como chofer'] },
+    { id: 'humano', ir: 'humano', clave: ['persona', 'agente', 'asesor', 'humano', 'whatsapp'], ej: ['hablar con una persona', 'quiero un asesor'] },
+    { id: 'saludo', ir: 'inicio', ej: ['hola', 'buenas', 'ayuda'] }
+  ];
+  return {
+    nodos: nodos, intenciones: intenciones, inicio: 'inicio', humano: 'humano', siNo: 'humano', nombre: 'Asistente Drivu', acciones: {},
+    sugerencias: function () { return [{ t: 'Tuve un problema con un viaje', ir: 'problema' }, { t: 'Precios y pagos', ir: 'pagos' }, { t: 'Hablar con una persona', ir: 'humano' }]; }
+  };
+}
+(function(){
+  // Asistente de ayuda: abre y cierra la ventana y arranca la conversación la primera vez
+  var fab=document.getElementById('ay-fab'),pan=document.getElementById('ay-panel'),burb=document.getElementById('ay-burb');if(!fab||!pan)return;
+  var bot=null;
+  function enlace(sel,def){var a=document.querySelector(sel);return a?a.getAttribute('href'):def;}
+  function chico(){return window.matchMedia('(max-width:600px)').matches;}
+  function abrir(){
+    pan.hidden=false;fab.setAttribute('aria-expanded','true');document.body.classList.add('ay-abierto');burb.hidden=true;
+    try{sessionStorage.setItem('drivu.ayuda.visto','1');}catch(e){}
+    if(!bot){
+      var cfg=flujoAyudaLanding({proto:'https://claude.ai/artifact/MpJ3Tn1Fr54TbG2AzQWLHt',libro:enlace('.lr-link','libro-de-reclamaciones.html'),wa:'https://wa.link/jjhop8'});
+      cfg.log=document.getElementById('ay-log');cfg.ctrl=document.getElementById('ay-ctrl');cfg.raiz=pan;
+      bot=DrivuAyuda.crear(cfg);bot.ir('inicio');
+    }
+    setTimeout(function(){var p=pan.querySelector('.dab-op, #ay-cerrar');(p||pan).focus();},chico()?50:0);
+  }
+  function cerrar(){pan.hidden=true;fab.setAttribute('aria-expanded','false');document.body.classList.remove('ay-abierto');fab.focus();}
+  fab.addEventListener('click',abrir);
+  document.getElementById('ay-cerrar').addEventListener('click',cerrar);
+  document.getElementById('ay-reini').addEventListener('click',function(){if(bot)bot.reiniciar();});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!pan.hidden){e.stopPropagation();cerrar();}});
+  // Un enlace a una sección de esta página cierra la ventana en el celular para que se vea la sección
+  pan.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href^="#"]');if(a&&chico())setTimeout(cerrar,250);});
+  // Globo "¿Necesitas ayuda?" una vez por visita, a los 6 segundos
+  try{if(!sessionStorage.getItem('drivu.ayuda.visto'))setTimeout(function(){if(pan.hidden){burb.hidden=false;setTimeout(function(){burb.hidden=true;},7000);}},6000);}catch(e){}
+})();
+</script>
+<!--@@DAB-FIN@@-->
 <a class="wa-float sobre-cta" href="https://wa.link/jjhop8" target="_blank" rel="noopener" aria-label="Contáctanos por WhatsApp" title="Contáctanos por WhatsApp"><svg viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M16.04 3C9 3 3.3 8.7 3.3 15.74c0 2.25.59 4.45 1.71 6.39L3.2 28.8l6.84-1.79a12.7 12.7 0 0 0 6 1.53h.01c7.03 0 12.75-5.72 12.75-12.75 0-3.4-1.33-6.6-3.74-9.01A12.66 12.66 0 0 0 16.04 3zm0 23.4h-.01a10.6 10.6 0 0 1-5.4-1.48l-.39-.23-4.06 1.06 1.08-3.96-.25-.41a10.57 10.57 0 0 1-1.62-5.64c0-5.85 4.76-10.61 10.62-10.61 2.83 0 5.5 1.11 7.5 3.11a10.55 10.55 0 0 1 3.1 7.51c0 5.86-4.76 10.65-10.57 10.65zm5.82-7.94c-.32-.16-1.89-.93-2.18-1.04-.29-.11-.5-.16-.72.16-.21.32-.82 1.04-1.01 1.25-.19.21-.37.24-.69.08-.32-.16-1.35-.5-2.57-1.59-.95-.85-1.59-1.9-1.78-2.22-.19-.32-.02-.49.14-.65.14-.14.32-.37.48-.56.16-.19.21-.32.32-.53.11-.21.05-.4-.03-.56-.08-.16-.72-1.73-.98-2.37-.26-.62-.52-.54-.72-.55h-.61c-.21 0-.56.08-.85.4-.29.32-1.12 1.09-1.12 2.66s1.14 3.09 1.3 3.3c.16.21 2.25 3.43 5.44 4.81.76.33 1.35.52 1.82.67.76.24 1.46.21 2.01.13.61-.09 1.89-.77 2.15-1.52.27-.74.27-1.38.19-1.52-.08-.13-.29-.21-.61-.37z"/></svg></a>
 
 <script>
