@@ -1,0 +1,64 @@
+/* Entrada de la página (intro.js). Cada demo tiene su propia apertura y su propio ritmo; lo de abajo es común.
+   Ritmo por demo: --e-h (curva), --dur (duración de entrada), --desp (cuánto sube), --paso (cascada). */
+:root{--e:cubic-bezier(.2,.7,.2,1);--e-h:var(--e);--dur:.8s;--desp:18px;--paso:65ms}
+.splash{display:none}
+.js .splash{position:fixed;inset:0;z-index:200;display:grid;place-items:center;overflow:hidden;animation:splashSeguro .01s 4.4s forwards}
+.js .splash[hidden]{display:none}
+@keyframes splashSeguro{to{visibility:hidden;pointer-events:none}}
+@keyframes safeShow{to{opacity:1;transform:none;clip-path:none}}
+@keyframes flota{0%,100%{translate:0 0}50%{translate:0 -9px}}
+
+.btn:active,.agregar:active,.mas:active,.tabs-carta button:active,.tabs button:active{scale:.96}
+.hero-foto img,.arco img{transition:transform .5s ease-out,scale 1.7s var(--e-h) .3s}
+/* Lo que no se ve no se anima (intro.js pone .is-offscreen a la portada) */
+.hero.is-offscreen,.hero.is-offscreen *,.hero.is-offscreen *::before,.hero.is-offscreen *::after{animation-play-state:paused!important}
+
+@media (prefers-reduced-motion:no-preference){
+  .js .hero-foto,.js .arco,.js .arco::before,.js .arco img{animation:none}
+  .top{transition:transform .7s var(--e-h) .1s}
+  html.js:not(.is-open) .top{transform:translateY(-100%);animation:safeShow .01s 4.8s forwards}
+  .hero-txt>*:not(h1){transition:opacity var(--dur) var(--e-h),transform var(--dur) var(--e-h),background-color .2s,color .2s,border-color .2s}
+  .hero-txt>*:nth-child(2){transition-delay:calc(.35s + var(--paso)*1.5)}
+  .hero-txt>*:nth-child(3){transition-delay:calc(.35s + var(--paso)*3)}
+  .hero-txt>*:nth-child(4){transition-delay:calc(.35s + var(--paso)*4.5)}
+  .hero-txt>*:nth-child(5){transition-delay:calc(.35s + var(--paso)*6)}
+  .hero-txt>*:nth-child(6){transition-delay:calc(.35s + var(--paso)*7.5)}
+  html.js:not(.is-open) .hero-txt>*:not(h1){opacity:0;transform:translateY(var(--desp));animation:safeShow .01s 4.8s forwards}
+  .hero h1 .w{display:inline-block;overflow:hidden;vertical-align:bottom;padding:0 .05em .14em;margin:0 -.05em -.14em}
+  .hero h1 .w>span{display:inline-block;transition:transform var(--dur) var(--e-h) calc(.2s + min(var(--i,0),9)*var(--paso))}
+  html.js:not(.is-open) .hero h1 .w>span{transform:translateY(112%);animation:safeShow .01s 4.8s forwards}
+  .hero .btn,.hero .sede-sel button{translate:var(--mx,0) var(--my,0)}
+  .hero-foto img,.arco img{transform:translate(var(--px,0),var(--py,0))}
+  /* Al bajar: aparece una vez, en cascada corta */
+  .rv{opacity:0;transform:translateY(calc(var(--desp)*1.4));transition:opacity var(--dur) ease,transform var(--dur) var(--e-h);transition-delay:calc(var(--k,0)*var(--paso)*1.2)}
+  .rv.rv-in{opacity:1;transform:none}
+}
+
+
+
+/* Ritmo Don Facu: seco y rápido, como un palito que sale de la parrilla */
+:root{--e-h:cubic-bezier(.25,.85,.25,1);--dur:.7s;--desp:22px;--paso:50ms}
+
+/* Apertura: tres palitos entran a la parrilla, se encienden y la brasa abre la página hacia arriba */
+.js .splash{background:var(--brasa);grid-template-rows:auto auto;align-content:center;gap:1.6rem;transition:clip-path .95s cubic-bezier(.7,0,.2,1) .2s;clip-path:inset(0 0 0 0)}
+.js .splash::before{content:"";position:absolute;inset:auto -10% -30% -10%;height:70%;background:radial-gradient(60% 70% at 50% 100%,rgba(242,107,29,.7),rgba(143,58,12,.3) 45%,transparent 70%);animation:brasa 2.2s ease-in-out infinite alternate}
+.splash.is-out{clip-path:inset(0 0 100% 0)}
+.palitos,.d-txt{position:relative;z-index:1}
+.palitos{display:grid;gap:18px;width:min(480px,86vw)}
+.palitos i{position:relative;display:block;height:10px;border-radius:6px;background:#C9B68C;transform-origin:left;scale:0 1;animation:entra .7s cubic-bezier(.25,.85,.25,1) forwards}
+.palitos i:nth-child(2){animation-delay:.15s}.palitos i:nth-child(3){animation-delay:.3s}
+.palitos i::before{content:"";position:absolute;left:12%;right:10%;top:-9px;bottom:-9px;border-radius:8px;background:repeating-linear-gradient(90deg,#5A2E0A 0 46px,transparent 46px 60px);box-shadow:0 0 18px 2px rgba(242,107,29,.0);animation:enciende 1s ease-out .9s forwards;opacity:.0}
+.palitos i:nth-child(2)::before{animation-delay:1.05s}.palitos i:nth-child(3)::before{animation-delay:1.2s}
+@keyframes entra{to{scale:1 1}}
+@keyframes enciende{0%{opacity:0}30%{opacity:1;background:repeating-linear-gradient(90deg,#8F3A0C 0 46px,transparent 46px 60px);box-shadow:0 0 22px 6px rgba(242,107,29,.8)}100%{opacity:1;background:repeating-linear-gradient(90deg,#4A2308 0 46px,transparent 46px 60px);box-shadow:0 0 16px 2px rgba(242,107,29,.55)}}
+.d-txt{display:grid;justify-items:center;gap:.3rem;text-align:center;color:var(--perg);transition:opacity .3s}
+.d-txt>*{animation:dSube .6s var(--e) both}
+.d-txt small{font:700 .85rem var(--texto);letter-spacing:.3em;text-transform:uppercase;color:var(--ascua);animation-delay:.95s}
+.d-txt b{font:800 clamp(3.2rem,13vw,5.6rem)/.9 var(--disp);letter-spacing:.02em;text-transform:uppercase;animation-delay:1.05s}
+.d-txt span{font:500 1.05rem var(--texto);animation-delay:1.25s}
+@keyframes dSube{from{opacity:0;transform:translateY(14px)}}
+.splash.is-out .d-txt,.splash.is-out .palitos{opacity:0;transition:opacity .25s}
+@media (prefers-reduced-motion:no-preference){
+  .hero-foto{transition:opacity .6s ease .35s,transform .9s cubic-bezier(.25,.85,.25,1) .35s}
+  html.js:not(.is-open) .hero-foto{opacity:0;transform:translateY(40px);animation:safeShow .01s 4.8s forwards}
+}
