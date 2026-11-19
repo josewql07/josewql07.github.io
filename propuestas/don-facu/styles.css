@@ -73,7 +73,7 @@ p{text-wrap:pretty}
 .destacados h2,.carta h2,.locales h2{font-size:clamp(2.3rem,5vw,3.8rem);color:var(--brasa);margin-bottom:1.75rem}
 .dest-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem}
 .gran{position:relative;display:flex;flex-direction:column;padding:1.4rem 1.4rem 1.2rem;background:var(--leche);border:2px solid var(--brasa);border-radius:4px;box-shadow:6px 6px 0 var(--marron)}
-.gran .num{position:absolute;right:1rem;top:.4rem;font:800 4.4rem/1 var(--disp);color:color-mix(in srgb,var(--marron) 18%,transparent)}
+.gran::after{content:attr(data-n);position:absolute;right:1rem;top:.4rem;font:800 4.4rem/1 var(--disp);color:color-mix(in srgb,var(--marron) 18%,transparent);pointer-events:none}
 .gran h3{font-size:2rem;color:var(--achiote);max-width:75%}
 .gran p{margin:.5rem 0 0;font-size:.97rem}
 .gran .fila{margin-top:auto;padding-top:1rem;display:flex;align-items:center;justify-content:space-between;gap:.5rem}
@@ -187,6 +187,24 @@ html:not(.js) .pane-t{display:block;font-size:1.8rem;margin:1.5rem 0 .75rem;colo
 .flotante{background:var(--ascua);color:var(--brasa);border-color:var(--brasa)}
 .flotante .cuenta{background:var(--brasa);color:var(--perg)}
 .form input:focus-visible,.form select:focus-visible{border-color:var(--achiote)}
+/* Fotos reales */
+.collage{position:relative;display:grid;grid-template-columns:1fr 1fr 1fr;gap:.7rem;align-items:center;padding:.4rem .2rem}
+.collage img{width:100%;height:auto;display:block;border:3px solid var(--perg);border-radius:4px;box-shadow:5px 5px 0 var(--marron);object-fit:cover}
+.collage .f1{transform:rotate(-2.2deg);aspect-ratio:4/5}
+.collage .f2{transform:rotate(1.6deg) translateY(-.4rem);aspect-ratio:1/1}
+.collage .f3{transform:rotate(-1.2deg);aspect-ratio:4/5}
+.credito{margin:0;font-size:.78rem;opacity:.85;text-align:center}
+.hero .credito{color:var(--masa)}
+.galeria{max-width:var(--ancho);margin:0 auto;padding:clamp(2rem,6vw,4rem) 1rem 0}
+.gal-grid{list-style:none;margin:1.2rem 0 .8rem;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:.9rem;align-items:end}
+.gal-grid li{margin:0}
+.gal-grid img{width:100%;height:auto;display:block;border:3px solid var(--brasa);border-radius:4px;box-shadow:5px 5px 0 var(--marron);background:var(--masa)}
+.gal-grid li:nth-child(odd) img{transform:rotate(-1deg)}
+.gal-grid li:nth-child(even) img{transform:rotate(1deg)}
+.galeria .credito{color:var(--carbon);text-align:left}
+@media (max-width:760px){.gal-grid{grid-template-columns:1fr 1fr}.collage{gap:.45rem}.collage img{border-width:2px;box-shadow:3px 3px 0 var(--marron)}}
+/* Pestañas de la carta fijas al bajar */
+.tabs{position:sticky;top:3.4rem;z-index:5;background:var(--perg);padding:.5rem 0}
 /* Ficha del plato, horario y pago del pedido */
 .ficha{--ac:var(--achiote)}
 .ficha .f-foto{display:block;width:100%;aspect-ratio:16/10;object-fit:cover;height:auto}
