@@ -39,26 +39,31 @@
 /* Ritmo Don Facu: seco y rápido, como un palito que sale de la parrilla */
 :root{--e-h:cubic-bezier(.25,.85,.25,1);--dur:.7s;--desp:22px;--paso:50ms}
 
-/* Apertura: tres palitos entran a la parrilla, se encienden y la brasa abre la página hacia arriba */
-.js .splash{background:var(--brasa);grid-template-rows:auto auto;align-content:center;gap:1.6rem;transition:clip-path .95s cubic-bezier(.7,0,.2,1) .2s;clip-path:inset(0 0 0 0)}
-.js .splash::before{content:"";position:absolute;inset:auto -10% -30% -10%;height:70%;background:radial-gradient(60% 70% at 50% 100%,rgba(242,107,29,.7),rgba(143,58,12,.3) 45%,transparent 70%);animation:brasa 2.2s ease-in-out infinite alternate}
+/* Apertura: un palito cruza la parrilla, se asa y quema el nombre letra por letra */
+.js .splash{background:var(--brasa);display:grid;grid-template-rows:auto auto auto;align-content:center;justify-items:center;gap:1.1rem;transition:clip-path .95s cubic-bezier(.7,0,.2,1) .2s;clip-path:inset(0 0 0 0)}
+.js .splash::before{content:"";position:absolute;inset:auto -10% -30% -10%;height:70%;background:radial-gradient(60% 70% at 50% 100%,rgba(242,107,29,.55),rgba(143,58,12,.25) 45%,transparent 70%);animation:brasa 2.2s ease-in-out infinite alternate}
 .splash.is-out{clip-path:inset(0 0 100% 0)}
-.palitos,.d-txt{position:relative;z-index:1}
-.palitos{display:grid;gap:18px;width:min(480px,86vw)}
-.palitos i{position:relative;display:block;height:10px;border-radius:6px;background:#C9B68C;transform-origin:left;scale:0 1;animation:entra .7s cubic-bezier(.25,.85,.25,1) forwards}
-.palitos i:nth-child(2){animation-delay:.15s}.palitos i:nth-child(3){animation-delay:.3s}
-.palitos i::before{content:"";position:absolute;left:12%;right:10%;top:-9px;bottom:-9px;border-radius:8px;background:repeating-linear-gradient(90deg,#5A2E0A 0 46px,transparent 46px 60px);box-shadow:0 0 18px 2px rgba(242,107,29,.0);animation:enciende 1s ease-out .9s forwards;opacity:.0}
-.palitos i:nth-child(2)::before{animation-delay:1.05s}.palitos i:nth-child(3)::before{animation-delay:1.2s}
-@keyframes entra{to{scale:1 1}}
-@keyframes enciende{0%{opacity:0}30%{opacity:1;background:repeating-linear-gradient(90deg,#8F3A0C 0 46px,transparent 46px 60px);box-shadow:0 0 22px 6px rgba(242,107,29,.8)}100%{opacity:1;background:repeating-linear-gradient(90deg,#4A2308 0 46px,transparent 46px 60px);box-shadow:0 0 16px 2px rgba(242,107,29,.55)}}
-.d-txt{display:grid;justify-items:center;gap:.3rem;text-align:center;color:var(--perg);transition:opacity .3s}
-.d-txt>*{animation:dSube .6s var(--e) both}
-.d-txt small{font:700 .85rem var(--texto);letter-spacing:.3em;text-transform:uppercase;color:var(--ascua);animation-delay:.95s}
-.d-txt b{font:800 clamp(3.2rem,13vw,5.6rem)/.9 var(--disp);letter-spacing:.02em;text-transform:uppercase;animation-delay:1.05s}
-.d-txt span{font:500 1.05rem var(--texto);animation-delay:1.25s}
-@keyframes dSube{from{opacity:0;transform:translateY(14px)}}
-.splash.is-out .d-txt,.splash.is-out .palitos{opacity:0;transition:opacity .25s}
+.brasero,.d-nom,.d-sub{position:relative;z-index:1}
+.brasero{width:min(900px,94vw);height:clamp(60px,11vw,100px)}
+.rejilla{position:absolute;inset:0;display:grid;align-content:center;gap:clamp(10px,2vw,16px)}
+.rejilla i{display:block;height:3px;background:linear-gradient(90deg,#3A2A1D,#7A5E3F);transform-origin:left;scale:0 1;animation:barra .6s cubic-bezier(.25,.85,.25,1) forwards}
+.rejilla i:nth-child(2){animation-delay:.08s}.rejilla i:nth-child(3){animation-delay:.16s}
+@keyframes barra{to{scale:1 1}}
+.palo{position:absolute;inset:0;width:100%;height:100%;translate:-115% 0;rotate:-4deg;animation:entraPalo .9s cubic-bezier(.2,.9,.25,1.04) .2s forwards}
+@keyframes entraPalo{to{translate:0 0;rotate:0deg}}
+.palo .v{fill:#C9B68C}
+.palo .c{fill:#4A2308;stroke:#F26B1D;stroke-width:3;stroke-opacity:0;animation:asa 1.1s ease-out calc(1s + var(--k) * .08s) forwards}
+@keyframes asa{0%{fill:#4A2308;stroke-opacity:0}35%{fill:#F26B1D;stroke-opacity:.9}100%{fill:#3A1A07;stroke-opacity:.5}}
+.chispas i{position:absolute;left:var(--x);bottom:35%;width:4px;height:4px;border-radius:50%;background:#FF9A4D;opacity:0;animation:vuela 1.1s ease-out var(--d) forwards}
+@keyframes vuela{0%{opacity:0;translate:0 0}15%{opacity:1}100%{opacity:0;translate:10px calc(var(--h) * -1)}}
+.d-nom{margin:0;display:flex;font:800 clamp(3.4rem,14vw,6.4rem)/.95 var(--disp);color:var(--perg);letter-spacing:.02em;text-transform:uppercase}
+.d-nom span{display:inline-block;clip-path:inset(0 0 100% 0);translate:0 .3em;animation:quema .55s cubic-bezier(.25,.85,.25,1) calc(1.15s + var(--i) * .07s) forwards}
+.d-nom .sp{width:.32em}
+@keyframes quema{0%{clip-path:inset(0 0 100% 0);translate:0 .3em;color:var(--ascua);text-shadow:0 0 18px rgba(242,107,29,.9)}70%{color:var(--ascua)}100%{clip-path:inset(0 0 0 0);translate:0 0;color:var(--perg);text-shadow:0 0 0 transparent}}
+.d-sub{margin:0;font:600 1rem var(--texto);color:var(--masa);opacity:0;animation:dSube .5s ease 1.9s forwards}
+@keyframes dSube{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.splash.is-out .brasero,.splash.is-out .d-nom,.splash.is-out .d-sub{opacity:0;transition:opacity .25s}
 @media (prefers-reduced-motion:no-preference){
-  .hero-foto{transition:opacity .6s ease .35s,transform .9s cubic-bezier(.25,.85,.25,1) .35s}
-  html.js:not(.is-open) .hero-foto{opacity:0;transform:translateY(40px);animation:safeShow .01s 4.8s forwards}
+  .slats{transition:opacity .6s ease .35s,transform .9s cubic-bezier(.25,.85,.25,1) .35s}
+  html.js:not(.is-open) .slats{opacity:0;transform:translateY(40px);animation:safeShow .01s 4.8s forwards}
 }
