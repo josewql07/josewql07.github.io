@@ -5,6 +5,11 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="robots" content="noindex">
 <meta name="description" content="Sencillo: control de ingresos y gastos en soles, con lectura de comprobantes de Yape y Plin.">
+<meta name="apple-mobile-web-app-title" content="Sencillo">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" href="apple-touch-icon.png">
+<meta name="theme-color" content="#f5f6f8" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0b1020" media="(prefers-color-scheme: dark)">
 <title>Sencillo</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -310,7 +315,7 @@ async function initStore(){
     mode='local';
     try { const d = JSON.parse(localStorage.getItem(LKEY)||'null'); if(d){ state.cfg=normalize(d.cfg); state.movs=Array.isArray(d.movs)?d.movs:[]; } } catch {}
     note('Modo local: tus datos se guardan solo en este navegador.');
-    state.loading=false; render(); return;
+    state.loading=false; render(); handleParams(); return;
   }
   mode='db';
   cfgRef = db.doc('fin/config'); movsCol = db.collection('fin/config/movs');
@@ -339,6 +344,35 @@ async function addMov(m){
 async function delMov(id){
   if (mode==='local'){ state.movs = state.movs.filter(m=>m.id!==id); localSave(); render(); return true; }
   try { await movsCol.doc(id).delete(); return true; } catch(e){ fail(e); return false; }
+}
+
+/* ---------- registro rápido por enlace (Atajos de iPhone) ----------
+   ?add=gasto&monto=26&nota=Café&cat=Comida&cuenta=Yape  -> guarda al instante
+   ?nuevo=gasto | ?nuevo=ingreso | ?nuevo=comprobante   -> abre el formulario */
+async function handleParams(){
+  let q; try { q = new URLSearchParams(location.search); } catch { return; }
+  if (![...q.keys()].length) return;
+  try { history.replaceState(null, '', location.pathname + location.hash); } catch {}
+  const c = state.cfg, low = x => String(x||'').trim().toLowerCase();
+  const tipo = low(q.get('add')||q.get('tipo')) === 'ingreso' ? 'ingreso' : 'gasto';
+  const cats = tipo==='ingreso' ? c.catIngreso : c.catGasto;
+  const catIn = low(q.get('cat')||q.get('categoria'));
+  const cat = cats.find(x=>low(x)===catIn) || cats.find(x=>catIn && low(x).startsWith(catIn)) || (tipo==='ingreso' ? (cats.includes('Otros ingresos')?'Otros ingresos':cats[0]) : (cats.includes('Otros')?'Otros':cats[0]));
+  const ctaIn = low(q.get('cuenta'));
+  const cuenta = (c.cuentas.find(a=>low(a.nombre)===ctaIn||a.id===ctaIn) || c.cuentas[0] || {}).id;
+  const nota = String(q.get('nota')||'').trim().slice(0,80);
+  if (q.has('add')) {
+    const monto = parseMonto(q.get('monto'));
+    if (!(monto>0)) { openMov({tipo, cat, cuenta, nota}); toast('No llegó el monto. Escríbelo aquí.', true); return; }
+    let fecha = q.get('fecha'); if (!/^\d{4}-\d{2}-\d{2}$/.test(fecha||'')) fecha = hoy();
+    if (await addMov({tipo, monto, cat, cuenta, fecha, nota, origen:'atajo'})) {
+      state.mes = fecha.slice(0,7); state.view='resumen'; render();
+      toast((tipo==='ingreso'?'Ingreso':'Gasto')+' de '+fmt(monto)+' guardado en '+cat);
+    }
+    return;
+  }
+  const n = low(q.get('nuevo'));
+  if (n==='comprobante') openComp(); else if (n) openMov({tipo: n==='ingreso'?'ingreso':'gasto'});
 }
 
 /* ---------- cálculos ---------- */
@@ -374,7 +408,7 @@ const emptyBox = (icon, title, text, btn) => `<div class="empty"><div class="bad
 
 function movRow(m, withDel){
   const isIn = m.tipo==='ingreso';
-  const tag = m.origen==='comprobante' ? `<span class="chip-s ai">${I('receipt',12)}comprobante</span>` : m.origen==='fijo' ? `<span class="chip-s">${I('repeat',12)}fijo</span>` : '';
+  const tag = m.origen==='comprobante' ? `<span class="chip-s ai">${I('receipt',12)}comprobante</span>` : m.origen==='fijo' ? `<span class="chip-s">${I('repeat',12)}fijo</span>` : m.origen==='atajo' ? `<span class="chip-s">${I('spark',12)}atajo</span>` : '';
   return `<div class="mov ${isIn?'in':'out'}">
     <div class="badge">${I(isIn?'in':'out',18)}</div>
     <div style="min-width:0"><div class="t">${esc(m.nota||m.cat)}${tag}</div>
@@ -745,7 +779,13 @@ async function exportCSV(){
   for (const m of [...state.movs].sort((a,b)=>(a.fecha||'').localeCompare(b.fecha||''))) rows.push([m.fecha,m.tipo,m.monto,m.cat,cuentaNombre(m.cuenta),m.nota||'',m.origen||'']);
   const csv = '﻿'+rows.map(r=>r.map(x=>{ let s=String(x??''); if(/^[=+\-@]/.test(s)) s="'"+s; return /[",;\n]/.test(s)?'"'+s.replace(/"/g,'""')+'"':s; }).join(',')).join('\n');
   let dl=null; try{ dl = window.claude ? await window.claude.use('downloads') : null; }catch{}
-  if (!dl) return toast('La descarga no está disponible en esta vista.', true);
+  if (!dl) {
+    if (window.claude) return toast('La descarga no está disponible en esta vista.', true);
+    try { const u = URL.createObjectURL(new Blob([csv],{type:'text/csv'})); const a = document.createElement('a');
+      a.href = u; a.download = 'sencillo-movimientos-'+hoy()+'.csv'; document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(()=>URL.revokeObjectURL(u), 4000); toast('Respaldo descargado'); } catch { toast('No se pudo descargar el archivo.', true); }
+    return;
+  }
   try { await dl.save({filename:'sencillo-movimientos-'+hoy()+'.csv', data: new Blob([csv],{type:'text/csv'})}); }
   catch(e){ if(e && e.code!=='declined') toast('No se pudo descargar el archivo.', true); }
 }
