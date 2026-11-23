@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Widget de Sencillo</title>
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="theme-color" content="#0f2a5c">
+<style>
+:root{--bg:#f4f6fb;--card:#fff;--ink:#14213d;--muted:#5b6478;--brand:#163d82;--gold:#f5c542;--line:#dde2ee}
+@media (prefers-color-scheme:dark){:root{--bg:#0b1324;--card:#131d33;--ink:#eef2fa;--muted:#a3adc2;--brand:#7aa5ff;--line:#26324d}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
+main{max-width:640px;margin:0 auto;padding:24px 16px 48px}
+header{display:flex;align-items:center;gap:12px;margin-bottom:8px}
+header img{width:44px;height:44px;border-radius:11px}
+h1{font-size:24px;margin:0}
+p.lead{color:var(--muted);margin:4px 0 20px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;margin-bottom:14px}
+h2{font-size:17px;margin:0 0 10px}
+ol{margin:0;padding-left:22px}
+li{margin:6px 0}
+b{font-weight:600}
+code{font:14px ui-monospace,SFMono-Regular,Menlo,monospace;background:color-mix(in srgb,var(--brand) 12%,transparent);padding:1px 5px;border-radius:5px;word-break:break-all}
+button{appearance:none;border:0;border-radius:12px;background:var(--brand);color:#fff;font:600 17px/1 inherit;font-family:inherit;padding:16px;width:100%;cursor:pointer}
+@media (prefers-color-scheme:dark){button{color:#0b1324}}
+button:disabled{opacity:.5}
+#estado{text-align:center;color:var(--muted);font-size:14px;margin:10px 0 0;min-height:21px}
+textarea{width:100%;height:140px;margin-top:12px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);font:12px ui-monospace,Menlo,monospace;padding:10px}
+.nota{font-size:14px;color:var(--muted)}
+</style>
+</head>
+<body>
+<main>
+  <header><img src="apple-touch-icon.png" alt=""><h1>Widget de Sencillo</h1></header>
+  <p class="lead">Tu saldo en la pantalla de inicio y registro en 3 preguntas, gratis, con la app Scriptable.</p>
+
+  <div class="card">
+    <h2>1. Copia el código</h2>
+    <button id="copiar" disabled>Cargando…</button>
+    <p id="estado"></p>
+    <textarea id="codigo" readonly aria-label="Código del script"></textarea>
+  </div>
+
+  <div class="card">
+    <h2>2. Pégalo en Scriptable</h2>
+    <ol>
+      <li>Instala <b>Scriptable</b> desde la App Store (es gratis).</li>
+      <li>Ábrela y toca <b>+</b> arriba a la derecha.</li>
+      <li>Toca dentro del editor, mantén presionado y elige <b>Pegar</b>.</li>
+      <li>Toca el título <b>Untitled Script</b> y ponle de nombre <code>Sencillo</code> (así, con S mayúscula).</li>
+      <li>Toca <b>Listo</b> / <b>Done</b>.</li>
+      <li>Pruébalo tocando el script: verás el menú con tu saldo.</li>
+    </ol>
+  </div>
+
+  <div class="card">
+    <h2>3. Pon el widget</h2>
+    <ol>
+      <li>Mantén presionada la pantalla de inicio y toca <b>Editar</b> y luego <b>Añadir widget</b>.</li>
+      <li>Busca <b>Scriptable</b>, elige tamaño (pequeño, mediano o grande) y toca <b>Añadir widget</b>.</li>
+      <li>Mantén presionado el widget nuevo, toca <b>Editar widget</b> y en <b>Script</b> elige <b>Sencillo</b>.</li>
+    </ol>
+    <p class="nota">Al tocar el widget te pregunta ¿De cuánto?, ¿En qué fue?, ¿Qué categoría? y con qué pagaste. También funciona en la pantalla de bloqueo.</p>
+  </div>
+
+  <div class="card">
+    <h2>Opcional: Atajo, Siri o botón de acción</h2>
+    <p class="nota" style="margin-top:0">En la app Atajos crea un atajo con una sola acción, <b>Abrir URL</b>, con <code>scriptable:///run/Sencillo?accion=gasto</code>. Llámalo <b>Gasto</b> y úsalo con Siri, el botón de acción o Tocar atrás. Para ingresos usa <code>accion=ingreso</code>.</p>
+  </div>
+
+  <div class="card">
+    <h2>Tus datos</h2>
+    <p class="nota" style="margin:0">Se guardan en tu iCloud Drive, en <b>Scriptable › sencillo-datos.json</b>. No se suben a ningún otro lado. Puedes cambiar categorías, cuentas y saldo inicial al inicio del script, en <code>CONFIG</code>. Para un respaldo, abre el script y elige <b>Exportar CSV</b>.</p>
+  </div>
+</main>
+<script>
+(async () => {
+  const btn = document.getElementById('copiar'), est = document.getElementById('estado'), ta = document.getElementById('codigo');
+  try {
+    const r = await fetch('scriptable/Sencillo.js', { cache: 'no-cache' });
+    if (!r.ok) throw new Error(r.status);
+    ta.value = await r.text();
+    btn.disabled = false; btn.textContent = 'Copiar código';
+  } catch (e) {
+    btn.textContent = 'No se pudo cargar'; est.textContent = 'Revisa tu conexión y recarga la página.'; return;
+  }
+  btn.addEventListener('click', async () => {
+    try { await navigator.clipboard.writeText(ta.value); }
+    catch { ta.focus(); ta.select(); ta.setSelectionRange(0, ta.value.length); try { document.execCommand('copy'); } catch {} }
+    btn.textContent = 'Copiado ✓'; est.textContent = 'Ahora ve a Scriptable y pégalo.';
+    setTimeout(() => { btn.textContent = 'Copiar código'; }, 2500);
+  });
+})();
+</script>
+</body>
+</html>
