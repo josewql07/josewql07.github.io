@@ -40,6 +40,15 @@ Ponle de nombre **Gasto** y elige un ícono.
 - **Tocar atrás**: *Ajustes > Accesibilidad > Tocar > Tocar atrás > Doble toque > Gasto*.
 - **Siri**: di "Oye Siri, Gasto".
 
+## 4. Widget con tu saldo (gratis, con Scriptable)
+
+Abre `https://josewql07.github.io/sencillo/widget.html` en el iPhone, toca **Copiar código** y sigue los pasos: instalas **Scriptable** (gratis), pegas el script con el nombre `Sencillo` y añades el widget de Scriptable a tu pantalla de inicio.
+
+- El widget muestra tu saldo, lo gastado y lo ingresado en el mes (el grande también muestra los últimos movimientos).
+- Al tocarlo te pregunta ¿De cuánto?, ¿En qué fue?, ¿Qué categoría? y con qué pagaste.
+- Para Siri o el botón de acción: Atajo con **Abrir URL** `scriptable:///run/Sencillo?accion=gasto`.
+- Los datos del widget se guardan en iCloud Drive (*Scriptable › sencillo-datos.json*), separados de los de Safari.
+
 ## Otros enlaces útiles
 
 - `…/sencillo/?nuevo=gasto`: abre directo el formulario de gasto.
