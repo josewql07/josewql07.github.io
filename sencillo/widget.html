@@ -27,6 +27,7 @@ button{appearance:none;border:0;border-radius:12px;background:var(--brand);color
 @media (prefers-color-scheme:dark){button{color:#0b1324}}
 button:disabled{opacity:.5}
 #estado{text-align:center;color:var(--muted);font-size:14px;margin:10px 0 0;min-height:21px}
+.boton2{display:block;text-align:center;text-decoration:none;border:2px solid var(--brand);color:var(--brand);border-radius:12px;font-weight:600;padding:14px}
 textarea{width:100%;height:140px;margin-top:12px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);font:12px ui-monospace,Menlo,monospace;padding:10px}
 .nota{font-size:14px;color:var(--muted)}
 </style>
@@ -41,6 +42,18 @@ textarea{width:100%;height:140px;margin-top:12px;border:1px solid var(--line);bo
     <button id="copiar" disabled>Cargando…</button>
     <p id="estado"></p>
     <textarea id="codigo" readonly aria-label="Código del script"></textarea>
+    <p class="nota" style="margin:10px 0 0">Antes de pegar, borra todo lo que haya en el script nuevo de Scriptable. La primera línea pegada debe empezar con <code>// Sencillo para Scriptable</code>.</p>
+  </div>
+
+  <div class="card">
+    <h2>¿Te sale un error? Instálalo sin copiar</h2>
+    <a class="boton2" href="scriptable/Sencillo.js" download="Sencillo.js">Descargar Sencillo.js</a>
+    <ol style="margin-top:12px">
+      <li>Toca <b>Descargar Sencillo.js</b> y luego <b>Descargar</b>.</li>
+      <li>Abre la app <b>Archivos</b> y entra a <b>Descargas</b>.</li>
+      <li>Mantén presionado <b>Sencillo.js</b>, toca <b>Mover</b> y elige <b>iCloud Drive › Scriptable</b>.</li>
+      <li>Abre Scriptable: el script <b>Sencillo</b> ya aparece en la lista. Si antes creaste uno con error, bórralo.</li>
+    </ol>
   </div>
 
   <div class="card">
