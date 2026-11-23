@@ -23,3 +23,5 @@ Control personal de ingresos y gastos en soles (S/), pensado para Perú.
 ## Uso
 
 Es un solo archivo HTML sin dependencias de build. Abre `index.html` en el navegador o visita `/sencillo/` en el sitio.
+
+- Android: ver [ANDROID.md](ANDROID.md) (se instala como app desde Chrome y funciona sin internet).
