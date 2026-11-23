@@ -261,7 +261,7 @@ function crearWidget(datos) {
   sal.textColor = r.saldo < 0 ? COLORES.rojo : COLORES.texto;
   sal.minimumScaleFactor = 0.5;
   sal.lineLimit = 1;
-  w.addSpacer();
+  if (familia === 'large') w.addSpacer(14); else w.addSpacer();
 
   const fila = w.addStack();
   fila.layoutHorizontally();
@@ -300,7 +300,7 @@ function crearWidget(datos) {
     }
   }
 
-  w.addSpacer(6);
+  if (familia === 'large') w.addSpacer(); else w.addSpacer(6);
   const pie = w.addText('Toca para registrar');
   pie.font = Font.systemFont(9);
   pie.textColor = COLORES.suave;
