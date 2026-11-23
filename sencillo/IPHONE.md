@@ -47,6 +47,7 @@ Abre `https://josewql07.github.io/sencillo/widget.html` en el iPhone, toca **Cop
 - El widget muestra tu saldo, lo gastado y lo ingresado en el mes (el grande también muestra los últimos movimientos).
 - Al tocarlo te pregunta ¿De cuánto?, ¿En qué fue?, ¿Qué categoría? y con qué pagaste.
 - Para Siri o el botón de acción: Atajo con **Abrir URL** `scriptable:///run/Sencillo?accion=gasto`.
+- Al tocar el widget se abre Scriptable, porque iOS no deja escribir dentro de un widget. Para registrar **sin abrir Scriptable**, crea un Atajo con: *Solicitar entrada* (Número, `¿De cuánto?`), *Solicitar entrada* (Texto, `¿En qué fue?`), *Elegir de la lista* (categorías), *Diccionario* (`add`=`gasto`, `monto`, `nota`, `cat`), **Run Script** de Scriptable (script *Sencillo*, parámetro *Diccionario*, *Run In App* desactivado) y *Mostrar notificación* con el resultado. Ponlo en el widget de Atajos.
 - Los datos del widget se guardan en iCloud Drive (*Scriptable › sencillo-datos.json*), separados de los de Safari.
 
 ## Otros enlaces útiles
